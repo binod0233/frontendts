@@ -1,10 +1,11 @@
 import axios from "axios";
 import { FETCH_TOKEN, UPDATE_TOKEN } from "./tokenType";
 
-export const fetchToken = () => {
+export const fetchToken = (query) => {
+  console.log("query datta", query);
   return function (dispatch) {
     var OPTION = {
-      url: "http://localhost:1337/tokens",
+      url: "http://localhost:1337/tokens?",
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -13,7 +14,7 @@ export const fetchToken = () => {
 
     axios(OPTION)
       .then((res) => {
-        // console.log("get res", res);
+        console.log("get res", res);
         const tokens = res.data;
         dispatch(getToken(tokens));
       })
@@ -25,11 +26,14 @@ export const getToken = (tokens) => {
   return { type: FETCH_TOKEN, payload: tokens };
 };
 
-export const updateToken = (totalToken) => {
+export const updateToken = (totalToken, currentToken) => {
+  console.log("current==", currentToken);
+  console.log("current==", totalToken);
+
   var OPTIONS = {
-    url: "http://localhost:1337/tokens/5f6b4b4f511ccb4aee09527a",
+    url: "http://localhost:1337/tokens/5f917a2cd9970356e79bb513",
     method: "PUT",
-    data: { totalToken: totalToken },
+    data: { totalToken: totalToken, currentToken: currentToken },
     headers: {
       "content-type": "application/json",
     },
@@ -43,3 +47,17 @@ export const updateToken = (totalToken) => {
     payload: totalToken,
   };
 };
+
+// export const user = () => {
+//   var OPTIONS = {
+//     url: "http://localhost:1337/auth/local",
+//     method: "POST",
+//     data: { identifier: "binod@gmail.com", password: "strapi" },
+//     headers: {
+//       "content-type": "application/json",
+//     },
+//   };
+//   axios(OPTIONS)
+//     .then((res) => console.log(console.log("user", res)))
+//     .catch((err) => console.log(err));
+// };

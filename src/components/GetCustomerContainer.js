@@ -1,52 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-// import { updateToken } from "../redux";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchToken, updateToken } from "../redux/action/tokenAction";
 import { Form } from "formik";
 import { addCtoken, fetchCtoken } from "../redux/action/customerAction";
-const GetTokenContainer = (props) => {
+const GetCustomerContainer = (props) => {
+  console.log("first prop", props.userDetail);
   const [totalToken, settotalToken] = useState(0);
   const [count, setCount] = useState(0);
   const [yourToken, setYourtoken] = useState(0);
-  const [currentToken, setCurrenttoken] = useState(0);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // var code = currentToken;
     dispatch(fetchToken());
   }, []);
-  // useEffect(() => {
-  //   dispatch(fetchCtoken());
-  // }, []);
-  const allToken = useSelector((state) => state.token.allTokens);
   const allCtoken = useSelector((state) => state.customer.allCtokens);
+  useEffect(() => {
+    dispatch(fetchCtoken());
+  }, []);
 
-  console.log("all token", allToken);
-  // console.log("your token", allCtoken.yourToken);
-  var doo = "ok";
-  if (doo === "ok") {
+  const allToken = useSelector((state) => state.token.allTokens);
+
+  console.log("your token", allCtoken);
+
+  var Ctoken = allCtoken.map((val) => {
+    if (val.userId === props.userDetail) {
+      var val = val.yourToken;
+      console.log(val);
+      return val;
+    }
+  });
+
+  var yToken = Ctoken.filter((f) => {
+    return f != null;
+  });
+  if (yToken[0] === undefined) {
+    yToken = "user not found";
+  } else yToken = yToken[0];
+  console.log("finding.....", yToken);
+
+  if (yToken === "user not found") {
     var toDo = allToken.map((val, i) => (
       <>
         <tr key={i}>
           <td key={val._id}></td>
           <td>total token={val.totalToken}</td>
           <td>current token={val.currentToken}</td>
-          {/* <p>{("count=", count)}</p> */}
-          <p>booked</p>
+
+          <p>click to book</p>
         </tr>
-        <p>{currentToken}</p>
+
         <button
           onClick={() => {
-            var currentToken = val.currentToken + 1;
-            // var count = 0;
-            // setCount(count);
-            setCurrenttoken(currentToken);
-            props.updateToken(totalToken, currentToken);
+            var totalToken = val.totalToken + 1;
+            var yourToken = totalToken;
+            settotalToken(totalToken);
+            props.updateToken(totalToken);
+            setYourtoken(yourToken);
+            props.addCtoken(yourToken, props.userDetail);
           }}
         >
-          cancel
+          click
         </button>
       </>
     ));
@@ -57,25 +72,15 @@ const GetTokenContainer = (props) => {
           <td key={val._id}></td>
           <td>total token={val.totalToken}</td>
           <td>current token={val.currentToken}</td>
-          <p>{("count=", count)}</p>
-
-          <p>click to book</p>
+          <p>your token is {yToken}</p>
+          <p>booked</p>
         </tr>
-
-        <button
+        {/* <button
           onClick={() => {
-            var totalToken = val.totalToken + 1;
-            var count = 1;
-            var yourToken = totalToken;
-            setCount(count);
-            settotalToken(totalToken);
-            props.updateToken(totalToken);
-            setYourtoken(yourToken);
-            props.addCtoken(yourToken);
           }}
         >
-          click
-        </button>
+          cancel
+        </button> */}
       </>
     ));
   }
@@ -85,22 +90,25 @@ const GetTokenContainer = (props) => {
     </>
   );
 };
-
 const mapStatetoProps = (state) => {
   return {
     totalToken: state.token.totalToken,
+    userDetail: state.user.userDetails.id,
   };
 };
 
 const mapDispatchtoProps = (dispatch) => {
   return {
-    updateToken: function (totalToken, currentToken) {
-      dispatch(updateToken(totalToken, currentToken));
+    updateToken: function (totalToken) {
+      dispatch(updateToken(totalToken));
     },
-    addCtoken: function (yourToken) {
-      dispatch(addCtoken(yourToken));
+    addCtoken: function (yourToken, userDetail) {
+      dispatch(addCtoken(yourToken, userDetail));
     },
   };
 };
 
-export default connect(mapStatetoProps, mapDispatchtoProps)(GetTokenContainer);
+export default connect(
+  mapStatetoProps,
+  mapDispatchtoProps
+)(GetCustomerContainer);

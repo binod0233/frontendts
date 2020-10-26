@@ -1,11 +1,8 @@
 import { FETCH_TOKEN, UPDATE_TOKEN } from "../action/tokenType";
 
 const initialState = {
-  token: "",
   allTokens: [],
-  name: "",
-  contact: "",
-  location: "",
+
   action: "Click",
   totalToken: NaN,
 };
