@@ -27,12 +27,15 @@ export const getCtoken = (ctokens) => {
   return { type: FETCH_CTOKEN, payload: ctokens };
 };
 
-export const addCtoken = (yourToken, userId) => {
-  console.log("yourtoken sjdkfj", yourToken);
+export const addCtoken = (yourToken, userId, bankName) => {
+  console.log(
+    "yourtoken sjdkfj .....................................",
+    bankName
+  );
   var OPTIONS = {
     url: "http://localhost:1337/customers/",
     method: "POST",
-    data: { yourToken: yourToken, userId: userId },
+    data: { yourToken: yourToken, userId: userId, bankName: bankName },
     headers: {
       "content-type": "application/json",
     },

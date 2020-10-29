@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import LoginContainer from "./LoginContainer";
 import Header from "./Header";
 import GetCustomerContainer from "./GetCustomerContainer";
+import TimeComponent from "./TimeComponent";
+import CustomerContainer from "./CustomerContainer";
 
 const MainContainer = (props) => {
   const isUserLoggedin = useSelector((state) => state.user.isLoggedIn);
@@ -23,7 +25,8 @@ const MainContainer = (props) => {
     callContainer = (
       <>
         <Header />
-        <Route exact path="/" component={GetCustomerContainer} />
+        {/* <TimeComponent /> */}
+        <Route exact path="/" component={CustomerContainer} />
       </>
     );
   }
