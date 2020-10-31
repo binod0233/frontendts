@@ -14,6 +14,7 @@ const initialState = {
   action: "Signup",
   msg: "",
   userDetails: {},
+  userRole: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -29,6 +30,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         msg: action.payload,
         isLoggedIn: action.isLoggedIn,
+        userRole: action.userRole,
       };
     case SET_CURRENT_USER:
       return {

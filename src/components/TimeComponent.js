@@ -29,8 +29,6 @@ const TimeComponent = () => {
   return (
     <div>
       <Countdown date={Date.now() + retime} renderer={renderer} />
-      {/* <GetCustomerContainer /> */}
-      <p>this is user=={user}</p>
     </div>
   );
 };

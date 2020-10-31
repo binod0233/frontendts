@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Box, CssBaseline } from "@material-ui/core";
-import GetCustomerContainer from "./GetCustomerContainer";
+import GetCustomerContainer, { DataContext } from "./GetCustomerContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-const CustomerContainer = () => {
+const CustomerContainer = (props) => {
   const classes = useStyles();
   return (
     <>
       {/* <Button /> */}
       <CssBaseline />
-
       <GetCustomerContainer />
+      {/* <p>youtttttttttttttttt={user.totalToken}</p> */}
     </>
   );
 };

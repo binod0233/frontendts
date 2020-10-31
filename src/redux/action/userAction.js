@@ -54,13 +54,13 @@ export const loginUser = (username, password) => {
       .then((res) => {
         const message = "User Found";
         console.log("token message", res.data);
+        const userRole = res.data.user.role.name;
         if (message === "User Found") {
           const token = res.data.jwt;
-
           localStorage.setItem("jwtToken", token);
           setAuthToken(token);
           console.log("hello woek");
-          console.log(res.data);
+          console.log(res.data.user.role.name);
           console.log(jwt.decode(token));
           console.log("end");
           dispatch(setCurrentUser(jwt.decode(token)));
@@ -68,6 +68,7 @@ export const loginUser = (username, password) => {
             type: LOGIN_USER,
             payload: message,
             isLoggedIn: true,
+            userRole: userRole,
           });
         } else {
           dispatch({

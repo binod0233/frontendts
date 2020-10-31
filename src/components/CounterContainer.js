@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-const GetCustomerContainer = (props) => {
+const CounterContainer = (props) => {
   const classes = useStyles();
   const [age, setAge] = useState("");
   const [totalToken, settotalToken] = useState(0);
@@ -221,7 +221,48 @@ const GetCustomerContainer = (props) => {
   return (
     <>
       <div className={classes.root}>
-        <div>{toDo}</div>
+        <div>
+          {allToken.map((val, i) => (
+            <>
+              <Grid container spacing={3} alignItems="stretch" key={i}>
+                <Grid item xs={6}>
+                  <Paper className={classes.paper}>
+                    <Typography variant="h5" component="h2">
+                      Total token={val.totalToken}
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper className={classes.paper}>
+                    <Typography variant="h5" component="h2">
+                      Current token={val.currentToken}
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper className={classes.paper}>
+                    <Typography variant="h5" component="h2">
+                      yout token={yToken}
+                    </Typography>
+                  </Paper>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Paper className={classes.paper}>
+                    <Typography variant="h5" component="h2">
+                      branch name={" "}
+                      {allCtoken.map((val) => {
+                        if (val.userId === props.userDetail) {
+                          return val.bankName;
+                        }
+                      })}
+                    </Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </>
+          ))}
+        </div>
       </div>
     </>
   );
@@ -244,7 +285,4 @@ const mapDispatchtoProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStatetoProps,
-  mapDispatchtoProps
-)(GetCustomerContainer);
+export default connect(mapStatetoProps, mapDispatchtoProps)(CounterContainer);
