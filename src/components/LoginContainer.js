@@ -35,11 +35,11 @@ function LoginContainer(props) {
   //   setTimeout(() => setLoading(false), 500);
   // }, []);
   const initialValues = {
-    UserName: "",
+    Email: "",
     Password: "",
   };
   const validationSchema = Yup.object({
-    UserName: Yup.string().email().required("Enter the name"),
+    Email: Yup.string().email().required("Enter the name"),
     Password: Yup.string().required("No password provided."),
   });
   // function handlechanges() {
@@ -48,7 +48,7 @@ function LoginContainer(props) {
   const onSubmit = (values, onSubmitProps) => {
     console.log("Form data dddddddddddddddddddddddddddddd", values);
     onSubmitProps.resetForm();
-    props.loginUser(values.UserName, values.Password);
+    props.loginUser(values.Email, values.Password);
     // handlechanges;
     // props.addPost(values.name);
   };
@@ -80,8 +80,8 @@ function LoginContainer(props) {
                         <Col>
                           <Field
                             component={TextField}
-                            label="UserName"
-                            name="UserName"
+                            label="Email"
+                            name="Email"
                             size="medium"
                             id="standard-size-small"
                             InputProps={{ notched: true }}
