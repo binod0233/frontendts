@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { signupUser } from "../redux";
@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Formik, Form, Field } from "formik";
 import { Button, Paper, Grid, Typography } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as Yup from "yup";
 import { Row, Col } from "react-bootstrap";

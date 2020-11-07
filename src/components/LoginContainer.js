@@ -6,10 +6,10 @@ import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
 import * as Yup from "yup";
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
-import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
-import { Link, Route } from "react-router-dom";
-import SignupContainer from "./SignupContainer";
+// import { red } from "@material-ui/core/colors";
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+// import SignupContainer from "./SignupContainer";
 import HomeContainer from "./HomeContainer";
 
 const useStyles = makeStyles((theme) => ({

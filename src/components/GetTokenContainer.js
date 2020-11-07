@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 // import { updateToken } from "../redux";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchToken, updateToken } from "../redux/action/tokenAction";
-import { Form } from "formik";
-import { addCtoken, fetchCtoken } from "../redux/action/customerAction";
+// import { Form } from "formik";
+import { addCtoken } from "../redux/action/customerAction";
 const GetTokenContainer = (props) => {
   const [totalToken, settotalToken] = useState(0);
   const [count, setCount] = useState(0);
-  const [yourToken, setYourtoken] = useState(0);
+  const [setYourtoken] = useState(0);
   const [currentToken, setCurrenttoken] = useState(0);
 
   const dispatch = useDispatch();

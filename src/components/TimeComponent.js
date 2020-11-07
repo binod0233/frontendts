@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Countdown from "react-countdown";
-import GetCustomerContainer from "./GetCustomerContainer";
+// import GetCustomerContainer from "./GetCustomerContainer";
 import { UserContext } from "./GetCustomerContainer";
 const TimeComponent = () => {
   //   const [retime, setretime] = useState(0);

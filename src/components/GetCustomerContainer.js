@@ -7,12 +7,8 @@ import TimeComponent from "./TimeComponent";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
 import FormikControl from "../formik/FormikControl";
-import { Grid, Paper, Typography, Button, Select } from "@material-ui/core";
-import { Formik, Form, Field } from "formik";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import CustomerContainer from "./CustomerContainer";
+import { Grid, Paper, Typography, Button } from "@material-ui/core";
+import { Formik, Form } from "formik";
 
 // import { Select } from "formik-material-ui";
 
@@ -31,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const GetCustomerContainer = (props) => {
   const classes = useStyles();
-  const [age, setAge] = useState("");
+  // const [age, setAge] = useState("");
   const [totalToken, settotalToken] = useState(0);
   const [yourToken, setYourtoken] = useState(0);
-  const [bank, setBank] = useState("");
+  // const [bank, setBank] = useState("");
 
   const [loading, setLoading] = useState(true);
-  var random = age;
+  // var random = age;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -63,8 +59,7 @@ const GetCustomerContainer = (props) => {
 
   var Ctoken = allCtoken.map((val) => {
     if (val.userId === props.userDetail) {
-      var val = val.yourToken;
-      return val;
+      return val.yourToken;
     }
   });
 

@@ -6,8 +6,8 @@ import SignupContainer from "./SignupContainer";
 import { useSelector } from "react-redux";
 import LoginContainer from "./LoginContainer";
 import Header from "./Header";
-import GetCustomerContainer from "./GetCustomerContainer";
-import TimeComponent from "./TimeComponent";
+// import GetCustomerContainer from "./GetCustomerContainer";
+// import TimeComponent from "./TimeComponent";
 import CustomerContainer from "./CustomerContainer";
 
 const MainContainer = (props) => {
@@ -26,7 +26,7 @@ const MainContainer = (props) => {
       </>
     );
   } else {
-    if (userRole == "customer") {
+    if (userRole === "customer") {
       callContainer = (
         <>
           <Header />

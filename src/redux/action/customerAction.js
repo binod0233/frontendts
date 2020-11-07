@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_CTOKEN, UPDATE_TOKEN, ADD_CTOKEN } from "./customerType";
+import { FETCH_CTOKEN, ADD_CTOKEN } from "./customerType";
 require("dotenv").config();
 const burl = process.env.REACT_APP_BE_URL;
 
