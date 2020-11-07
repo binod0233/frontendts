@@ -84,7 +84,7 @@ function LoginContainer(props) {
                             name="Email"
                             size="medium"
                             id="standard-size-small"
-                            InputProps={{ notched: true }}
+                            InputProps={{ notched: "true" }}
                           />
                         </Col>
                         <Col>
@@ -95,7 +95,7 @@ function LoginContainer(props) {
                             name="Password"
                             size="medium"
                             id="standard-size-small"
-                            InputProps={{ notched: true }}
+                            InputProps={{ notched: "true" }}
                           />
                         </Col>
                         <Typography align="left" variant="h6" noWrap>

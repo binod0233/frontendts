@@ -9,6 +9,10 @@ import * as Yup from "yup";
 import FormikControl from "../formik/FormikControl";
 import { Grid, Paper, Typography, Button } from "@material-ui/core";
 import { Formik, Form } from "formik";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import FormControl from "@material-ui/core/FormControl";
+// import CustomerContainer from "./CustomerContainer";
 
 // import { Select } from "formik-material-ui";
 
@@ -27,8 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const GetCustomerContainer = (props) => {
   const classes = useStyles();
-  // const [age, setAge] = useState("");
-
+  // const [bn, setbn] = useState("");
   const [totalToken, settotalToken] = useState(0);
   const [yourToken, setYourtoken] = useState(0);
   // const [bank, setBank] = useState("");
@@ -41,13 +44,18 @@ const GetCustomerContainer = (props) => {
     dispatch(fetchToken());
     const interval = setInterval(() => {
       dispatch(fetchToken());
-    }, 900000);
+    }, 1000);
 
     return () => clearInterval(interval);
-  });
+  }, [dispatch]);
   useEffect(() => {
     dispatch(fetchCtoken());
-  });
+    const interval = setInterval(() => {
+      dispatch(fetchCtoken());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 500);
@@ -58,20 +66,39 @@ const GetCustomerContainer = (props) => {
 
   console.log("your token", allCtoken);
 
-  var Ctoken = allCtoken.forEach((val) => {
-    if (val.userId === props.userDetail) {
-      return val.yourToken;
-    }
+  var Ctoken = allCtoken.map((val) => {
+    return val.userId === props.userDetail ? val : "";
+    // if (val.userId === props.userDetail) {
+    //   // var val = val.yourToken;
+    //   // return val.yourToken;
+    // }
+    // return <></>;
+  });
+  var random = Ctoken.filter((o) => o.yourToken);
+  var yToken = random.map((val) => {
+    console.log(val.yourToken);
+    // return <p>{val.yourToken}</p>;
+    return val.yourToken;
   });
 
-  var yToken = Ctoken.filter((f) => {
-    return f != null;
-  });
+  console.log("dsjfkdk ssssssssssssssssssssssssssssssdfjk", Ctoken);
+  // var yToken = "ok";
+  // var yToken = Ctoken.filter((f) => {
+  //   return f != null;
+  // });
 
   if (yToken[0] === undefined) {
     yToken = "user not found";
   } else yToken = yToken[0];
   console.log("finding.....", yToken);
+  if (yToken !== "user not found") {
+    var branch = Ctoken.filter((o) => o.bankName);
+    var bN = branch.map((val) => {
+      console.log(val.bankName);
+      return <p>{val.bankName}</p>;
+      // return val.yourToken;
+    });
+  }
 
   if (yToken === "user not found") {
     var toDo = allToken.map((val, i) => {
@@ -96,7 +123,7 @@ const GetCustomerContainer = (props) => {
         console.log("Form data vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", values);
         onSubmitProps.resetForm();
         // console.log("Saved data", JSON.parse(JSON.stringify(values)));
-        //here is var
+
         var totalToken = val.totalToken + 1;
         var yourToken = totalToken;
         settotalToken(totalToken);
@@ -176,7 +203,6 @@ const GetCustomerContainer = (props) => {
               <Typography variant="h5" component="h2">
                 Total token={val.totalToken}
               </Typography>
-              {(totalToken, yourToken)}
             </Paper>
           </Grid>
           <Grid item xs={6}>
@@ -207,12 +233,7 @@ const GetCustomerContainer = (props) => {
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
-                branch name={" "}
-                {allCtoken.forEach((val) => {
-                  if (val.userId === props.userDetail) {
-                    return val.bankName;
-                  }
-                })}
+                branch name={bN}
               </Typography>
             </Paper>
           </Grid>
@@ -227,7 +248,10 @@ const GetCustomerContainer = (props) => {
           <div>{toDo}</div>
         </div>
       ) : (
-        <p> loading ....loading .... </p>
+        <>
+          <p> loading ....loading .... </p>
+          {(totalToken, yourToken)}
+        </>
       )}
     </>
   );

@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 require("dotenv").config();
 const axios = require("axios");
 const burl = process.env.REACT_APP_BE_URL;
-console.log(`this is process  ${burl}/auth/local/register`, process.env.BE_URL);
+// console.log(`this is process  ${burl}/auth/local/register`, process.env.BE_URL);
 
 export const signupUser = (userName, email, password) => {
   console.log("user input", userName, email, password);
