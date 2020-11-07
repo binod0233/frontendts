@@ -7,6 +7,7 @@ const TimeComponent = () => {
   const user = useContext(UserContext);
   const Completionist = () => <span>You are good to go!</span>;
   var retime = user * 1000 * 60;
+  console.log("ssssssssssssssss timeeeeeeeeeeeeee", retime);
   //   const interval = setInterval(() => {
 
   //   }, 1000);
@@ -20,7 +21,7 @@ const TimeComponent = () => {
       // Render a countdown
       return (
         <span>
-          hours tme cp {hours}:{minutes}:{seconds}
+          hours tme cp {hours}:{minutes}:{}
         </span>
       );
     }

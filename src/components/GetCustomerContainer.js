@@ -222,9 +222,7 @@ const GetCustomerContainer = (props) => {
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
-                <UserContext.Provider
-                  value={-val.totalToken + val.currentToken}
-                >
+                <UserContext.Provider value={val.totalToken - val.currentToken}>
                   <TimeComponent />
                 </UserContext.Provider>
               </Typography>
