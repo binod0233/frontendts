@@ -90,10 +90,31 @@ const Navbar = (props) => {
         role="button"
       >
         <IconButton edge="end" color="inherit">
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography
+            className={classes.title}
+            style={{ color: "black" }}
+            variant="h6"
+            noWrap
+          >
             logout
           </Typography>
         </IconButton>
+      </Link>
+    );
+
+    var moblog = (
+      <Link
+        to="#"
+        onClick={() => props.logoutUser()}
+        className="dropdown-item"
+        role="button"
+      >
+        <MenuItem>
+          <IconButton color="inherit">
+            <AccountCircle />
+          </IconButton>
+          <p>logout</p>
+        </MenuItem>
       </Link>
     );
   }
@@ -134,12 +155,7 @@ const Navbar = (props) => {
         </IconButton>
         <p>Contact</p>
       </MenuItem>
-      {/* <MenuItem>
-        <IconButton color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>{logged}</p>
-      </MenuItem> */}
+      {moblog}
     </Menu>
   );
   return (
@@ -187,7 +203,6 @@ const Navbar = (props) => {
               </div>
             </Toolbar>
           </AppBar>
-
           {renderMobileMenu}
         </div>
       </Box>
