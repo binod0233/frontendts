@@ -3,6 +3,7 @@ import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../redux/action/userAction";
 import GetTokenContainer from "./GetTokenContainer";
+import { useSelector } from "react-redux";
 
 import Box from "@material-ui/core/Box";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -59,10 +60,14 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  color: {
+    color: "white",
+  },
 }));
 
 const Navbar = (props) => {
   const classes = useStyles();
+  const isUserLoggedin = useSelector((state) => state.user.isLoggedIn);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -75,6 +80,23 @@ const Navbar = (props) => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  if (isUserLoggedin === true) {
+    var logged = (
+      <Link
+        to="#"
+        onClick={() => props.logoutUser()}
+        className="dropdown-item"
+        role="button"
+      >
+        <IconButton edge="end" color="inherit">
+          <Typography className={classes.title} variant="h6" noWrap>
+            logout
+          </Typography>
+        </IconButton>
+      </Link>
+    );
+  }
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -112,6 +134,12 @@ const Navbar = (props) => {
         </IconButton>
         <p>Contact</p>
       </MenuItem>
+      {/* <MenuItem>
+        <IconButton color="inherit">
+          <AccountCircle />
+        </IconButton>
+        <p>{logged}</p>
+      </MenuItem> */}
     </Menu>
   );
   return (
@@ -121,7 +149,7 @@ const Navbar = (props) => {
           <AppBar position="static" className={classes.code}>
             <Toolbar>
               <IconButton edge="start" color="inherit">
-                <Avatar alt="Remy Sharp" src="./avatar.png" />
+                <Avatar alt="TS" src="./avatar.png" />
               </IconButton>
               <Typography className={classes.title} variant="h6" noWrap>
                 Token system
@@ -136,27 +164,21 @@ const Navbar = (props) => {
                 </IconButton>
                 <IconButton color="inherit">
                   <Typography className={classes.title} variant="h6" noWrap>
-                    <Link to="/abut">About</Link>
+                    <Link to="/abuot">About</Link>
                   </Typography>
                 </IconButton>
 
                 <IconButton edge="end" color="inherit">
                   <Typography className={classes.title} variant="h6" noWrap>
-                    Contact
+                    <Link
+                      to="/contact"
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Contact
+                    </Link>
                   </Typography>
                 </IconButton>
-                <Link
-                  to="#"
-                  onClick={() => props.logoutUser()}
-                  className="dropdown-item"
-                  role="button"
-                >
-                  <IconButton edge="end" color="inherit">
-                    <Typography className={classes.title} variant="h6" noWrap>
-                      logout
-                    </Typography>
-                  </IconButton>
-                </Link>
+                {logged}
               </div>
               <div className={classes.sectionMobile}>
                 <IconButton onClick={handleMobileMenuOpen} color="inherit">
@@ -173,72 +195,6 @@ const Navbar = (props) => {
     </>
   );
 };
-
-// export default Navbar;
-
-// import React from "react";
-// import { Link, Route } from "react-router-dom";
-// import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-// import { connect } from "react-redux";
-// import { logout } from "../redux/action/userAction";
-// // import PassowrdContainer from "./PasswordContainer";
-// // import GetPassowrdContainer from "./GetPasswordContainer";
-// import GetTokenContainer from "./GetTokenContainer";
-// import Header from "../../../backend/.cache/plugins/strapi-plugin-content-manager/admin/src/containers/EditView/Header";
-
-// function Header(props) {
-//   return (
-//     <div>
-//       <Navbar bg="light" expand="lg">
-//         <Navbar.Brand href="#home">Token System</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//         <Navbar.Collapse id="basic-navbar-nav">
-//           <Nav className="mr-auto">
-//             <Link to="/" className="dropdown-item" role="button">
-//               Home{" "}
-//             </Link>
-//             <NavDropdown title="Category" id="basic-nav-dropdown">
-//               <Link to="#" className="dropdown-item" role="button">
-//                 Add New Password Category
-//               </Link>
-//               <Link to="#" className="dropdown-item" role="button">
-//                 viwew Password Category
-//               </Link>
-//             </NavDropdown>
-//             <NavDropdown title="Passowrd" id="basic-nav-dropdown">
-//               <Link
-//                 to="/GetTokenContainer"
-//                 className="dropdown-item"
-//                 role="button"
-//               >
-//                 Add New Password
-//               </Link>
-//             </NavDropdown>
-//             <NavDropdown
-//               title={props.userDetails.username}
-//               id="basic-nav-dropdown"
-//             >
-//               <Link to="#" className="dropdown-item" role="button">
-//                 view profile
-//               </Link>
-//               <Link
-//                 to="#"
-//                 onClick={() => props.logoutUser()}
-//                 className="dropdown-item"
-//                 role="button"
-//               >
-//                 Logout
-//               </Link>
-//             </NavDropdown>
-//           </Nav>
-//         </Navbar.Collapse>
-//       </Navbar>
-//       <div></div>
-//       <Route path="/GetTokenContainer" component={GetTokenContainer} />
-//       {/* <Route path="/GetPasswordContainer" component={GetPassowrdContainer} /> */}
-//     </div>
-//   );
-// }
 
 const mapStatetoProps = (state) => {
   return { userDetails: state.user.userDetails };

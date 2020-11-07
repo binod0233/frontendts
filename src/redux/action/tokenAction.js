@@ -1,11 +1,13 @@
 import axios from "axios";
 import { FETCH_TOKEN, UPDATE_TOKEN } from "./tokenType";
+require("dotenv").config();
+const burl = process.env.REACT_APP_BE_URL;
 
 export const fetchToken = (query) => {
   console.log("query datta", query);
   return function (dispatch) {
     var OPTION = {
-      url: "http://localhost:1337/tokens?",
+      url: `${burl}/tokens?`,
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -31,7 +33,7 @@ export const updateToken = (totalToken, currentToken) => {
   console.log("current==", totalToken);
 
   var OPTIONS = {
-    url: "http://localhost:1337/tokens/5f917a2cd9970356e79bb513",
+    url: `${burl}/tokens/5f9e7c1c93e61a00175c2b0e`,
     method: "PUT",
     data: { totalToken: totalToken, currentToken: currentToken },
     headers: {
@@ -50,7 +52,7 @@ export const updateToken = (totalToken, currentToken) => {
 
 // export const user = () => {
 //   var OPTIONS = {
-//     url: "http://localhost:1337/auth/local",
+//     url: "`${url}`/auth/local",
 //     method: "POST",
 //     data: { identifier: "binod@gmail.com", password: "strapi" },
 //     headers: {

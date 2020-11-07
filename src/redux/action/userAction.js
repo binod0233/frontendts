@@ -6,16 +6,21 @@ import {
 } from "./userType";
 import setAuthToken from "./setAuth";
 import jwt from "jsonwebtoken";
+require("dotenv").config();
 const axios = require("axios");
+const burl = process.env.REACT_APP_BE_URL;
+console.log(`this is process  ${burl}/auth/local/register`, process.env.BE_URL);
 
-export const signupUser = (username, email, password) => {
-  console.log("user input", username, email, password);
+export const signupUser = (userName, email, password) => {
+  console.log("user input", userName, email, password);
   return function (dispatch) {
     var OPTIONS = {
-      url: "http://localhost:1337/auth/local/register",
+      url: `${burl}/auth/local/register`,
+      // url: process.env.S_URL,
+
       method: "POST",
       data: {
-        username: username,
+        username: userName,
         email: email,
         password: password,
       },
@@ -25,23 +30,35 @@ export const signupUser = (username, email, password) => {
     axios(OPTIONS)
       .then((res) => {
         console.log("well done", res.data);
-        const message = res.data.user;
+        let message = res.data.user.confirmed;
+        if (message === true) {
+          message = "User Registered successfully";
+        }
         console.log("error data", message);
         dispatch({
           type: SIGNUP_USER,
           payload: message,
         });
       })
-      .catch((err) =>
-        console.log(err.response.data.message[0].messages[0].message)
-      );
+      .catch((err) => {
+        let message = "";
+        if (err) {
+          message = "Email or Username already taken";
+        }
+
+        console.log("token error", err);
+        dispatch({
+          type: SIGNUP_USER,
+          payload: message,
+        });
+      });
   };
 };
 
 export const loginUser = (username, password) => {
   return function (dispatch) {
     var OPTIONS = {
-      url: "http://localhost:1337/auth/local",
+      url: `${burl}/auth/local`,
       method: "POST",
       data: {
         identifier: username,
@@ -54,6 +71,8 @@ export const loginUser = (username, password) => {
       .then((res) => {
         const message = "User Found";
         console.log("token message", res.data);
+        // console.log("token message", res.data.message[0].messages[0].message);
+
         const userRole = res.data.user.role.name;
         if (message === "User Found") {
           const token = res.data.jwt;
@@ -78,7 +97,18 @@ export const loginUser = (username, password) => {
           });
         }
       })
-      .catch((err) => console.log("token error", err));
+      .catch((err) => {
+        let message = err.response.data.message[0].messages[0].message;
+        if (message === "Identifier or password invalid.") {
+          message = "Invalid email or password";
+        }
+        console.log("token error", err);
+        dispatch({
+          type: LOGIN_USER,
+          payload: message,
+          isLoggedIn: false,
+        });
+      });
   };
 };
 

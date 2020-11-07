@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
     "formik": "^2.1.5",
     "formik-material-ui": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -22,12 +23,16 @@
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^2.5.0",
     "timer.js": "^1.0.4",
     "yup": "^0.29.3"
   },
   "scripts": {
+       "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
+     "predeploy": "npm run build",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -45,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://github.com/BInod0233/frontendts.git"
 }

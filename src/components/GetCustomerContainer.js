@@ -36,6 +36,7 @@ const GetCustomerContainer = (props) => {
   const [yourToken, setYourtoken] = useState(0);
   const [bank, setBank] = useState("");
 
+  const [loading, setLoading] = useState(true);
   var random = age;
 
   const dispatch = useDispatch();
@@ -49,6 +50,10 @@ const GetCustomerContainer = (props) => {
   }, []);
   useEffect(() => {
     dispatch(fetchCtoken());
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   const allToken = useSelector((state) => state.token.allTokens);
@@ -220,9 +225,13 @@ const GetCustomerContainer = (props) => {
   }
   return (
     <>
-      <div className={classes.root}>
-        <div>{toDo}</div>
-      </div>
+      {loading === false ? (
+        <div className={classes.root}>
+          <div>{toDo}</div>
+        </div>
+      ) : (
+        <p> loading ....loading .... </p>
+      )}
     </>
   );
 };

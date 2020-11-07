@@ -1,12 +1,14 @@
 import axios from "axios";
 import { FETCH_CTOKEN, UPDATE_TOKEN, ADD_CTOKEN } from "./customerType";
+require("dotenv").config();
+const burl = process.env.REACT_APP_BE_URL;
 
 export const fetchCtoken = (query) => {
   console.log("query datta", query);
 
   return function (dispatch) {
     var OPTION = {
-      url: "http://localhost:1337/customers",
+      url: `${burl}/customers`,
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -33,7 +35,7 @@ export const addCtoken = (yourToken, userId, bankName) => {
     bankName
   );
   var OPTIONS = {
-    url: "http://localhost:1337/customers/",
+    url: `${burl}/customers/`,
     method: "POST",
     data: { yourToken: yourToken, userId: userId, bankName: bankName },
     headers: {
@@ -52,7 +54,7 @@ export const addCtoken = (yourToken, userId, bankName) => {
 
 // export const updateToken = (totalToken, currentToken) => {
 //   var OPTIONS = {
-//     url: "http://localhost:1337/tokens/5f6b4b4f511ccb4aee09527a",
+//     url: "`${url}`/tokens/5f6b4b4f511ccb4aee09527a",
 //     method: "PUT",
 //     data: { totalToken: totalToken, currentToken: currentToken },
 //     headers: {
@@ -71,7 +73,7 @@ export const addCtoken = (yourToken, userId, bankName) => {
 
 // export const user = () => {
 //   var OPTIONS = {
-//     url: "http://localhost:1337/auth/local",
+//     url: "`${url}`/auth/local",
 //     method: "POST",
 //     data: { identifier: "binod@gmail.com", password: "strapi" },
 //     headers: {
