@@ -20,12 +20,18 @@ const useStyles = makeStyles((theme) => ({
   //   },
   // },
   root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(3),
+      width: 200,
+      // padding: "0.5rem",
+    },
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(10),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    backgroundColor: " #e6f5ff",
   },
 }));
 
@@ -86,44 +92,43 @@ function SignupContainer(props) {
                           <Col>
                             <Field
                               component={TextField}
-                              label="userName"
+                              label="Username"
                               name="userName"
-                              size="small"
+                              size="medium"
                               id="standard-size-small"
-                              InputProps={{ notched: true }}
+                              InputProps={{ notched: "true" }}
                             />
                           </Col>
                           <Col>
                             <Field
                               component={TextField}
-                              label="email"
+                              label="Email"
                               name="email"
-                              size="small"
+                              size="medium"
                               id="standard-size-small"
-                              InputProps={{ notched: true }}
+                              InputProps={{ notched: "true" }}
                             />
                           </Col>
                           <Col>
                             <Field
                               component={TextField}
-                              label="password"
+                              label="Password"
                               type="password"
                               name="password"
                               size="small"
                               id="standard-size-small"
-                              InputProps={{ notched: true }}
+                              InputProps={{ notched: "true" }}
                             />
                           </Col>
                           <Col>
                             <Field
-                              className={classes.paper}
                               component={TextField}
-                              label="conformpassword"
+                              label="Conformpassword"
                               type="password"
                               name="passwordConfirmation"
                               size="small"
                               id="standard-size-small"
-                              InputProps={{ notched: true }}
+                              InputProps={{ notched: "true" }}
                             />
                           </Col>
                           <Typography align="left" variant="h6" noWrap>

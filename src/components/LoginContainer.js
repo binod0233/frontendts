@@ -39,7 +39,7 @@ function LoginContainer(props) {
     Password: "",
   };
   const validationSchema = Yup.object({
-    Email: Yup.string().email().required("Enter the name"),
+    Email: Yup.string().email().required("Enter the Email"),
     Password: Yup.string().required("No password provided."),
   });
   // function handlechanges() {
@@ -83,7 +83,7 @@ function LoginContainer(props) {
                             label="Email"
                             name="Email"
                             size="medium"
-                            id="standard-size-small"
+                            id="standard-size-medium"
                             InputProps={{ notched: "true" }}
                           />
                         </Col>
@@ -94,7 +94,7 @@ function LoginContainer(props) {
                             type="password"
                             name="Password"
                             size="medium"
-                            id="standard-size-small"
+                            id="standard-size-medium"
                             InputProps={{ notched: "true" }}
                           />
                         </Col>

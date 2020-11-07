@@ -70,7 +70,7 @@ export const loginUser = (username, password) => {
     axios(OPTIONS)
       .then((res) => {
         const message = "User Found";
-        console.log("token message", res.data);
+        console.log("token message", res);
         // console.log("token message", res.data.message[0].messages[0].message);
 
         const userRole = res.data.user.role.name;
@@ -88,6 +88,7 @@ export const loginUser = (username, password) => {
             payload: message,
             isLoggedIn: true,
             userRole: userRole,
+            userName: res.data.user.username,
           });
         } else {
           dispatch({

@@ -29,15 +29,20 @@ export const getCtoken = (ctokens) => {
   return { type: FETCH_CTOKEN, payload: ctokens };
 };
 
-export const addCtoken = (yourToken, userId, bankName) => {
+export const addCtoken = (yourToken, userId, bankName, userName) => {
   console.log(
     "yourtoken sjdkfj .....................................",
-    bankName
+    userName
   );
   var OPTIONS = {
     url: `${burl}/customers/`,
     method: "POST",
-    data: { yourToken: yourToken, userId: userId, bankName: bankName },
+    data: {
+      yourToken: yourToken,
+      userId: userId,
+      bankName: bankName,
+      username: userName,
+    },
     headers: {
       "content-type": "application/json",
     },

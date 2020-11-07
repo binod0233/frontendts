@@ -15,6 +15,7 @@ import { Formik, Form } from "formik";
 // import CustomerContainer from "./CustomerContainer";
 
 // import { Select } from "formik-material-ui";
+import { Row, Col } from "react-bootstrap";
 
 export const UserContext = React.createContext();
 export const DataContext = React.createContext();
@@ -29,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
+
 const GetCustomerContainer = (props) => {
   const classes = useStyles();
+  // const userData = useSelector((state) => state.user.userName);
+
   // const [bn, setbn] = useState("");
   const [totalToken, settotalToken] = useState(0);
   const [yourToken, setYourtoken] = useState(0);
@@ -58,7 +62,7 @@ const GetCustomerContainer = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 500);
+    setTimeout(() => setLoading(false), 10);
   }, []);
 
   const allToken = useSelector((state) => state.token.allTokens);
@@ -81,7 +85,7 @@ const GetCustomerContainer = (props) => {
     return val.yourToken;
   });
 
-  console.log("dsjfkdk ssssssssssssssssssssssssssssssdfjk", Ctoken);
+  console.log("dsjfkdk ssssssssssssssssssssssssssssssdfjk", props.userName);
   // var yToken = "ok";
   // var yToken = Ctoken.filter((f) => {
   //   return f != null;
@@ -93,10 +97,15 @@ const GetCustomerContainer = (props) => {
   console.log("finding.....", yToken);
   if (yToken !== "user not found") {
     var branch = Ctoken.filter((o) => o.bankName);
+    var userName = Ctoken.filter((o) => o.username);
     var bN = branch.map((val) => {
       console.log(val.bankName);
-      return <p>{val.bankName}</p>;
+      return <>{val.bankName}</>;
       // return val.yourToken;
+    });
+    var userData = userName.map((val) => {
+      console.log(val.username);
+      return <span>{val.username}</span>;
     });
   }
 
@@ -105,8 +114,6 @@ const GetCustomerContainer = (props) => {
       const dropdownOptions = [
         { key: "Select an option", value: "" },
         { key: "Baneshwor", value: "Baneshwor" },
-        { key: "Durbar Marga", value: "Durbar Marga" },
-        { key: "Teku", value: "Teku" },
       ];
       const initialValues = {
         // bank: "",
@@ -131,7 +138,12 @@ const GetCustomerContainer = (props) => {
         setYourtoken(yourToken);
         // var bank = age;
         // setBank(bank);
-        props.addCtoken(yourToken, props.userDetail, values.selectOption);
+        props.addCtoken(
+          yourToken,
+          props.userDetail,
+          values.selectOption,
+          props.userName
+        );
       };
       return (
         <>
@@ -146,14 +158,14 @@ const GetCustomerContainer = (props) => {
             <Grid item xs={6}>
               <Paper className={classes.paper}>
                 <Typography variant="h5" component="h2">
-                  Total token={val.totalToken}
+                  Total Token={val.totalToken}
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper className={classes.paper}>
                 <Typography variant="h5" component="h2">
-                  Current token={val.currentToken}
+                  Current Token={val.currentToken}
                 </Typography>
               </Paper>
             </Grid>
@@ -167,8 +179,8 @@ const GetCustomerContainer = (props) => {
                   {(formik) => {
                     return (
                       <Form>
-                        <row>
-                          <col></col>
+                        <Row>
+                          <Col></Col>
                           <FormikControl
                             control="select"
                             label="Select a topic"
@@ -183,7 +195,7 @@ const GetCustomerContainer = (props) => {
                           >
                             Submit
                           </Button>
-                        </row>
+                        </Row>
                       </Form>
                     );
                   }}
@@ -198,40 +210,51 @@ const GetCustomerContainer = (props) => {
     toDo = allToken.map((val, i) => (
       <>
         <Grid container spacing={3} alignItems="stretch" key={i}>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography variant="h5" component="h2">
-                Total token={val.totalToken}
+          <Grid item xs={12}>
+            <Paper className={classes.paper} align>
+              <Typography variant="h5" component="h2" align="right">
+                Logged in as:{userData}
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
-                Current token={val.currentToken}
+                Total Token={val.totalToken}
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
-                yout token={yToken}
+                Current Token={val.currentToken}
               </Typography>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
-                <UserContext.Provider value={val.totalToken - val.currentToken}>
+                Your Token={yToken}
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <Typography variant="h5" component="h2">
+                <UserContext.Provider value={yToken - val.currentToken}>
                   <TimeComponent />
                 </UserContext.Provider>
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs wrap="wrap">
             <Paper className={classes.paper}>
-              <Typography variant="h5" component="h2">
-                branch name={bN}
+              {/* <Typography variant="h5" component="h2">
+                <span> Branch Name={bN} </span>
+              </Typography> */}
+              <Typography variant="h5" component="h2" wrap="nowrap">
+                {" "}
+                <span> Branch Name={bN} </span>
               </Typography>
             </Paper>
           </Grid>
@@ -258,6 +281,7 @@ const mapStatetoProps = (state) => {
   return {
     totalToken: state.token.totalToken,
     userDetail: state.user.userDetails.id,
+    userName: state.user.userName,
   };
 };
 
@@ -266,8 +290,8 @@ const mapDispatchtoProps = (dispatch) => {
     updateToken: function (totalToken) {
       dispatch(updateToken(totalToken));
     },
-    addCtoken: function (yourToken, userDetail, bankName) {
-      dispatch(addCtoken(yourToken, userDetail, bankName));
+    addCtoken: function (yourToken, userDetail, bankName, userName) {
+      dispatch(addCtoken(yourToken, userDetail, bankName, userName));
     },
   };
 };
