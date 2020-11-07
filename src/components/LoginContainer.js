@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { loginUser } from "../redux";
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 function LoginContainer(props) {
   const classes = useStyles();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500);
-  }, []);
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 500);
+  // }, []);
   const initialValues = {
     UserName: "",
     Password: "",

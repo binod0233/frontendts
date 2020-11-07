@@ -16,12 +16,12 @@ const GetTokenContainer = (props) => {
   useEffect(() => {
     // var code = currentToken;
     dispatch(fetchToken());
-  }, []);
+  });
   // useEffect(() => {
   //   dispatch(fetchCtoken());
   // }, []);
   const allToken = useSelector((state) => state.token.allTokens);
-  const allCtoken = useSelector((state) => state.customer.allCtokens);
+  // const allCtoken = useSelector((state) => state.customer.allCtokens);
 
   console.log("all token", allToken);
   // console.log("your token", allCtoken.yourToken);

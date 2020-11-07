@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 const GetCustomerContainer = (props) => {
   const classes = useStyles();
   // const [age, setAge] = useState("");
+
   const [totalToken, settotalToken] = useState(0);
   const [yourToken, setYourtoken] = useState(0);
   // const [bank, setBank] = useState("");
@@ -43,10 +44,10 @@ const GetCustomerContainer = (props) => {
     }, 900000);
 
     return () => clearInterval(interval);
-  }, []);
+  });
   useEffect(() => {
     dispatch(fetchCtoken());
-  }, []);
+  });
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 500);
@@ -57,7 +58,7 @@ const GetCustomerContainer = (props) => {
 
   console.log("your token", allCtoken);
 
-  var Ctoken = allCtoken.map((val) => {
+  var Ctoken = allCtoken.forEach((val) => {
     if (val.userId === props.userDetail) {
       return val.yourToken;
     }
@@ -95,7 +96,7 @@ const GetCustomerContainer = (props) => {
         console.log("Form data vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", values);
         onSubmitProps.resetForm();
         // console.log("Saved data", JSON.parse(JSON.stringify(values)));
-
+        //here is var
         var totalToken = val.totalToken + 1;
         var yourToken = totalToken;
         settotalToken(totalToken);
@@ -175,6 +176,7 @@ const GetCustomerContainer = (props) => {
               <Typography variant="h5" component="h2">
                 Total token={val.totalToken}
               </Typography>
+              {(totalToken, yourToken)}
             </Paper>
           </Grid>
           <Grid item xs={6}>
@@ -206,7 +208,7 @@ const GetCustomerContainer = (props) => {
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
                 branch name={" "}
-                {allCtoken.map((val) => {
+                {allCtoken.forEach((val) => {
                   if (val.userId === props.userDetail) {
                     return val.bankName;
                   }
