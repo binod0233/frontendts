@@ -40,7 +40,8 @@ const GetCustomerContainer = (props) => {
   const [yourToken, setYourtoken] = useState(0);
   // const [bank, setBank] = useState("");
 
-  const [loading, setLoading] = useState(true);
+  // var [loading, setLoading] = useState(true);
+  var loading = true;
   // var random = age;
 
   const dispatch = useDispatch();
@@ -48,27 +49,32 @@ const GetCustomerContainer = (props) => {
     dispatch(fetchToken());
     const interval = setInterval(() => {
       dispatch(fetchToken());
-    }, 1000);
+    }, 100000);
 
     return () => clearInterval(interval);
   }, [dispatch]);
+
   useEffect(() => {
     dispatch(fetchCtoken());
     const interval = setInterval(() => {
       dispatch(fetchCtoken());
-    }, 1000);
+    }, 100000);
 
     return () => clearInterval(interval);
   }, [dispatch]);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 10);
-  }, []);
+  const isUserLoggedin = useSelector((state) => state.user.isLoggedIn);
+  if (isUserLoggedin === true) loading = false;
+
+  // useEffect(() => {
+
+  //   // setTimeout(() => setLoading(false), 9000);
+  // }, []);
 
   const allToken = useSelector((state) => state.token.allTokens);
   const allCtoken = useSelector((state) => state.customer.allCtokens);
 
-  console.log("your token", allCtoken);
+  console.log("your token", isUserLoggedin);
 
   var Ctoken = allCtoken.map((val) => {
     return val.userId === props.userDetail ? val : "";
@@ -85,7 +91,7 @@ const GetCustomerContainer = (props) => {
     return val.yourToken;
   });
 
-  console.log("dsjfkdk ssssssssssssssssssssssssssssssdfjk", props.userName);
+  console.log("dsjfkdk ssssssssssssssssssssssssssssssdfjk", props.userDetail);
   // var yToken = "ok";
   // var yToken = Ctoken.filter((f) => {
   //   return f != null;
@@ -103,9 +109,9 @@ const GetCustomerContainer = (props) => {
       return <>{val.bankName}</>;
       // return val.yourToken;
     });
-    var userData = userName.map((val) => {
-      console.log(val.username);
-      return <span>{val.username}</span>;
+    var userData = userName.map((val, i) => {
+      console.log("useeeeeeeeeeeeeeeee name data:", val.username);
+      return <span key={i}>{val.username}</span>;
     });
   }
 
@@ -271,6 +277,16 @@ const GetCustomerContainer = (props) => {
       ) : (
         <>
           <p> loading ....loading .... </p>
+          <p> loading ....loading .... </p>
+
+          <p> loading ....loading .... </p>
+
+          <p> loading ....loading .... </p>
+
+          <p> loading ....loading .... </p>
+
+          <p> loading ....loading .... </p>
+
           {(totalToken, yourToken)}
         </>
       )}

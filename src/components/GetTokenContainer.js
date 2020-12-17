@@ -5,79 +5,84 @@ import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchToken, updateToken } from "../redux/action/tokenAction";
 // import { Form } from "formik";
+import { fetchCtoken } from "../redux/action/customerAction";
+
 import { addCtoken } from "../redux/action/customerAction";
+// import { setCurrentUser } from "../redux/action/userAction";
 const GetTokenContainer = (props) => {
-  const [totalToken, settotalToken] = useState(0);
-  const [count, setCount] = useState(0);
-  const [setYourtoken] = useState(0);
+  // const [currentToken, setCurrenttoken] = useState(0);
+
   const [currentToken, setCurrenttoken] = useState(0);
 
   const dispatch = useDispatch();
   useEffect(() => {
     // var code = currentToken;
     dispatch(fetchToken());
-  });
-  // useEffect(() => {
-  //   dispatch(fetchCtoken());
-  // }, []);
-  const allToken = useSelector((state) => state.token.allTokens);
-  // const allCtoken = useSelector((state) => state.customer.allCtokens);
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCtoken());
+    // const interval = setInterval(() => {
+    //   dispatch(fetchCtoken());
+    // }, 1000);
 
-  console.log("all token", allToken);
+    // return () => clearInterval(interval);
+  }, [dispatch]);
+  const allToken = useSelector((state) => state.token.allTokens);
+  const allCtoken = useSelector((state) => state.customer.allCtokens);
+
+  console.log("all token", allCtoken);
   // console.log("your token", allCtoken.yourToken);
   var doo = "ok";
   if (doo === "ok") {
-    var toDo = allToken.map((val, i) => (
-      <>
-        <tr key={i}>
-          <td key={val._id}></td>
-          <td>total token={val.totalToken}</td>
-          <td>current token={val.currentToken}</td>
-          {/* <p>{("count=", count)}</p> */}
-          <p>booked</p>
-        </tr>
-        <p>{currentToken}</p>
-        <button
-          onClick={() => {
-            var currentToken = val.currentToken + 1;
-            // var count = 0;
-            // setCount(count);
-            setCurrenttoken(currentToken);
-            props.updateToken(totalToken, currentToken);
-          }}
-        >
-          cancel
-        </button>
-      </>
-    ));
-  } else {
-    toDo = allToken.map((val, i) => (
-      <>
-        <tr key={i}>
-          <td key={val._id}></td>
-          <td>total token={val.totalToken}</td>
-          <td>current token={val.currentToken}</td>
-          <p>{("count=", count)}</p>
+    var toDo = allToken.map((val, i) => {
+      var Ctoken = allCtoken.map((value, i) => {
+        console.log(
+          `value=${value} val=${val} current token=${val.currentToken}and your token=${value.yourToken}`
+        );
+        console.log(value.yourToken);
+        if (Number(value.yourToken) === Number(val.currentToken))
+          console.log("found");
+        return Number(value.yourToken) === Number(val.currentToken) ? (
+          <>
+            <tr key={i}>
+              <td key={value._id}></td>
+              <td>bankname={value.bankName}</td>
+              <td>username={value.username}</td>
+              {/* <p>{("count=", count)}</p> */}
+              {/* {setCurrenttoken(val.currentToken)} */}
+              <p>counter conntaner</p>
+            </tr>
+          </>
+        ) : (
+          <></>
+        );
+      });
+      return (
+        <>
+          <tr key={i}>
+            <td key={val._id}></td>
+            <td>total token={val.totalToken}</td>
+            <td>current token={val.currentToken}</td>
+            {/* <p>{("count=", count)}</p> */}
+            {/* {setCurrenttoken(val.currentToken)} */}
+            <p>counter</p>
+          </tr>
+          <p>{currentToken}</p>
+          <div>{Ctoken}</div>
 
-          <p>click to book</p>
-        </tr>
+          <button
+            onClick={() => {
+              var currentToken = val.currentToken + 1;
 
-        <button
-          onClick={() => {
-            var totalToken = val.totalToken + 1;
-            var count = 1;
-            var yourToken = totalToken;
-            setCount(count);
-            settotalToken(totalToken);
-            props.updateToken(totalToken);
-            setYourtoken(yourToken);
-            props.addCtoken(yourToken);
-          }}
-        >
-          click
-        </button>
-      </>
-    ));
+              setCurrenttoken(currentToken);
+              props.updateToken(val.totalToken, currentToken);
+            }}
+          >
+            Inc. Current Token
+          </button>
+        </>
+      );
+    });
   }
   return (
     <>

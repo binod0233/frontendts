@@ -9,29 +9,41 @@ import Header from "./Header";
 // import GetCustomerContainer from "./GetCustomerContainer";
 // import TimeComponent from "./TimeComponent";
 import CustomerContainer from "./CustomerContainer";
+// import TestContainer from "./TestContainer";
+import Footer from "./Footer";
+import HomeContainer from "./HomeContainer";
+import { CssBaseline } from "@material-ui/core";
 
 const MainContainer = (props) => {
   const isUserLoggedin = useSelector((state) => state.user.isLoggedIn);
-  const userRole = useSelector((state) => state.user.userRole);
-  console.log("sssssssssssssssssssssssssssss", userRole);
+  const Role = useSelector((state) => state.user.userDetails.id);
+  // var container = <TestContainer />;
+  // let Role = "";
+  // if (userRole === "customer") {
+  // const Role = "customers";
+  // }
+  console.log("sssssssssssssssssssssssssssss", Role);
   if (isUserLoggedin === false) {
     var callContainer = (
       <>
         <Header />
-
-        <Route exact path="/" component={LoginContainer} />
-        {/* <Route exact path="/" component={GetTokenContainer} /> */}
+        <Route exact path="/" component={HomeContainer} />
+        <Route path="/login" component={LoginContainer} />
 
         <Route path="/signup" component={SignupContainer} />
+        <CssBaseline />
+        <Footer />
       </>
     );
   } else {
-    if (userRole === "customer") {
+    if (Role === "5fa82e594f4d4100173f9f82") {
       callContainer = (
         <>
           <Header />
           {/* <TimeComponent /> */}
           <Route exact path="/" component={GetTokenContainer} />
+          <Route path="/login" component={GetTokenContainer} />
+          <Footer />
         </>
       );
     } else {
@@ -40,6 +52,8 @@ const MainContainer = (props) => {
           <Header />
           {/* <TimeComponent /> */}
           <Route exact path="/" component={CustomerContainer} />
+          <Route path="/login" component={CustomerContainer} />
+          <Footer />
         </>
       );
     }

@@ -76,6 +76,7 @@ export const loginUser = (username, password) => {
         const userRole = res.data.user.role.name;
         if (message === "User Found") {
           const token = res.data.jwt;
+
           localStorage.setItem("jwtToken", token);
           setAuthToken(token);
           console.log("hello woek");
@@ -83,13 +84,24 @@ export const loginUser = (username, password) => {
           console.log(jwt.decode(token));
           console.log("end");
           dispatch(setCurrentUser(jwt.decode(token)));
-          dispatch({
-            type: LOGIN_USER,
-            payload: message,
-            isLoggedIn: true,
-            userRole: userRole,
-            userName: res.data.user.username,
-          });
+          if (userRole === "customer") {
+            dispatch({
+              type: LOGIN_USER,
+              payload: message,
+              isLoggedIn: true,
+              userRole: "customer",
+              userName: res.data.user.username,
+            });
+          } else {
+            dispatch({
+              type: LOGIN_USER,
+              payload: message,
+              isLoggedIn: true,
+              userRole: "no",
+
+              userName: res.data.user.username,
+            });
+          }
         } else {
           dispatch({
             type: LOGIN_USER,

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 import * as Yup from "yup";
 import { Row, Col } from "react-bootstrap";
-import HomeContainer from "./HomeContainer";
+// import HomeContainer from "./HomeContainer";
 
 const useStyles = makeStyles((theme) => ({
   // root: {
@@ -21,17 +21,21 @@ const useStyles = makeStyles((theme) => ({
   // },
   root: {
     "& .MuiTextField-root": {
-      margin: theme.spacing(3),
-      width: 200,
+      margin: theme.spacing(2),
+      // width: 200,
       // padding: "0.5rem",
     },
+    // padding: "4rem",
+    paddingTop: "4rem",
+    paddingBottom: "2rem",
+
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(10),
+    padding: theme.spacing(3),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: " #e6f5ff",
+    backgroundColor: " #b0d3d6",
   },
 }));
 
@@ -65,93 +69,83 @@ function SignupContainer(props) {
   return (
     <>
       <div className={classes.root}>
-        <Grid
-          container
-          spacing={0}
-          direction="row"
-          justify="center"
-          alignItems="stretch"
-        >
-          {/* <Route path="/" component={HomeContainer} /> */}
-          <HomeContainer />
-          <Grid item xs>
-            <Paper className={classes.paper} elevation={2}>
-              <Typography>Signup</Typography>
-              <Typography>{props.msg}</Typography>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Paper className={classes.paper} elevation={2}>
+            <Typography>Signup</Typography>
+            <Typography>{props.msg}</Typography>
 
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-              >
-                {(formik) => {
-                  return (
-                    <>
-                      <Form>
-                        <Row>
-                          <Col>
-                            <Field
-                              component={TextField}
-                              label="Username"
-                              name="userName"
-                              size="medium"
-                              id="standard-size-small"
-                              InputProps={{ notched: "true" }}
-                            />
-                          </Col>
-                          <Col>
-                            <Field
-                              component={TextField}
-                              label="Email"
-                              name="email"
-                              size="medium"
-                              id="standard-size-small"
-                              InputProps={{ notched: "true" }}
-                            />
-                          </Col>
-                          <Col>
-                            <Field
-                              component={TextField}
-                              label="Password"
-                              type="password"
-                              name="password"
-                              size="small"
-                              id="standard-size-small"
-                              InputProps={{ notched: "true" }}
-                            />
-                          </Col>
-                          <Col>
-                            <Field
-                              component={TextField}
-                              label="Conformpassword"
-                              type="password"
-                              name="passwordConfirmation"
-                              size="small"
-                              id="standard-size-small"
-                              InputProps={{ notched: "true" }}
-                            />
-                          </Col>
-                          <Typography align="left" variant="h6" noWrap>
-                            <Link to="/">Login</Link>
-                          </Typography>
-                          <Col>
-                            <Button
-                              type="submit"
-                              disabled={!formik.isValid}
-                              variant="contained"
-                              color="primary"
-                            >
-                              Submit
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Form>
-                    </>
-                  );
-                }}
-              </Formik>
-            </Paper>
-          </Grid>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {(formik) => {
+                return (
+                  <>
+                    <Form>
+                      <Row>
+                        <Col>
+                          <Field
+                            component={TextField}
+                            label="Username"
+                            name="userName"
+                            size="medium"
+                            id="standard-size-small"
+                            InputProps={{ notched: "true" }}
+                          />
+                        </Col>
+                        <Col>
+                          <Field
+                            component={TextField}
+                            label="Email"
+                            name="email"
+                            size="medium"
+                            id="standard-size-small"
+                            InputProps={{ notched: "true" }}
+                          />
+                        </Col>
+                        <Col>
+                          <Field
+                            component={TextField}
+                            label="Password"
+                            type="password"
+                            name="password"
+                            size="small"
+                            id="standard-size-small"
+                            InputProps={{ notched: "true" }}
+                          />
+                        </Col>
+                        <Col>
+                          <Field
+                            component={TextField}
+                            label="Conformpassword"
+                            type="password"
+                            name="passwordConfirmation"
+                            size="small"
+                            id="standard-size-small"
+                            InputProps={{ notched: "true" }}
+                          />
+                        </Col>
+                        <Typography align="left" variant="h6" noWrap>
+                          <Link to="/login">Login</Link>
+                        </Typography>
+                        <Col>
+                          <Button
+                            type="submit"
+                            disabled={!formik.isValid}
+                            variant="contained"
+                            color="primary"
+                          >
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Form>
+                  </>
+                );
+              }}
+            </Formik>
+          </Paper>
         </Grid>
       </div>
     </>

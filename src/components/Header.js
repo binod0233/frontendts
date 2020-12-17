@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { logout } from "../redux/action/userAction";
 import GetTokenContainer from "./GetTokenContainer";
 import { useSelector } from "react-redux";
-
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import HomeIcon from "@material-ui/icons/Home";
+// import { CssBaseline } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   code: {
@@ -89,10 +89,10 @@ const Navbar = (props) => {
         className="dropdown-item"
         role="button"
       >
-        <IconButton edge="end" color="inherit">
+        <IconButton edge="end" color="white">
           <Typography
             className={classes.title}
-            style={{ color: "black" }}
+            style={{ color: "white" }}
             variant="h6"
             noWrap
           >
@@ -116,6 +116,29 @@ const Navbar = (props) => {
           <p>logout</p>
         </MenuItem>
       </Link>
+    );
+  } else {
+    var signUP = (
+      <IconButton color="inherit">
+        <Typography className={classes.title} variant="h6" noWrap>
+          <Link to="/signup" style={{ color: "white", textDecoration: "none" }}>
+            Signup
+          </Link>
+        </Typography>
+      </IconButton>
+    );
+
+    var mobSignup = (
+      <MenuItem>
+        <IconButton color="inherit">
+          <NotificationsIcon />
+        </IconButton>
+        <p>
+          <Link to="/signup" style={{ color: "black", textDecoration: "none" }}>
+            Signup
+          </Link>
+        </p>
+      </MenuItem>
     );
   }
 
@@ -141,71 +164,77 @@ const Navbar = (props) => {
         <IconButton color="inherit">
           <HomeIcon />
         </IconButton>
-        <p>Home</p>
+        <p>
+          <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+            Home
+          </Link>
+        </p>
       </MenuItem>
+      {mobSignup}
       <MenuItem>
         <IconButton color="inherit">
           <NotificationsIcon />
         </IconButton>
-        <p>About</p>
+        <p>
+          <Link to="/about" style={{ color: "black", textDecoration: "none" }}>
+            About
+          </Link>
+        </p>
       </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>Contact</p>
-      </MenuItem>
+
       {moblog}
     </Menu>
   );
   return (
     <>
-      <Box>
-        <div className={classes.grow}>
-          <AppBar position="static" className={classes.code}>
-            <Toolbar>
-              <IconButton edge="start" color="inherit">
-                <Avatar alt="TS" src="./avatar.png" />
+      {/* <CssBaseline /> */}
+      {/* <Box> */}
+      <div className={classes.grow} style={{ padding: "0px,0px,0px,0px" }}>
+        <AppBar position="relative" className={classes.code}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit">
+              <Avatar alt="TS" src="./avatar.png" />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Token system
+            </Typography>
+
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <IconButton color="inherit">
+                <Typography className={classes.title} variant="h6" noWrap>
+                  <Link
+                    to="/"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Home
+                  </Link>
+                </Typography>
               </IconButton>
-              <Typography className={classes.title} variant="h6" noWrap>
-                Token system
-              </Typography>
+              {signUP}
 
-              <div className={classes.grow} />
-              <div className={classes.sectionDesktop}>
-                <IconButton color="inherit">
-                  <Typography className={classes.title} variant="h6" noWrap>
-                    <Link to="/">Home</Link>
-                  </Typography>
-                </IconButton>
-                <IconButton color="inherit">
-                  <Typography className={classes.title} variant="h6" noWrap>
-                    <Link to="/abuot">About</Link>
-                  </Typography>
-                </IconButton>
-
-                <IconButton edge="end" color="inherit">
-                  <Typography className={classes.title} variant="h6" noWrap>
-                    <Link
-                      to="/contact"
-                      style={{ color: "white", textDecoration: "none" }}
-                    >
-                      Contact
-                    </Link>
-                  </Typography>
-                </IconButton>
-                {logged}
-              </div>
-              <div className={classes.sectionMobile}>
-                <IconButton onClick={handleMobileMenuOpen} color="inherit">
-                  <MenuIcon />
-                </IconButton>
-              </div>
-            </Toolbar>
-          </AppBar>
-          {renderMobileMenu}
-        </div>
-      </Box>
+              <IconButton edge="end" color="inherit">
+                <Typography className={classes.title} variant="h6" noWrap>
+                  <Link
+                    to="/about"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    About
+                  </Link>
+                </Typography>
+              </IconButton>
+              {logged}
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton onClick={handleMobileMenuOpen} color="inherit">
+                <MenuIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+      </div>
+      {/* </Box> */}
       <Route path="/GetTokenContainer" component={GetTokenContainer} />
     </>
   );
