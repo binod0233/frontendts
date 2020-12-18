@@ -8,9 +8,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Online Token System
-      </Link>{" "}
+      <Link color="inherit">Online Token System</Link>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -23,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: theme.spacing(8),
     padding: theme.spacing(2, 0),
     // position: "sticky",
-    // left: "0",
-    // bottom: "0",
-    // width: "100%",
+    // position: "fixed",
+    left: "0",
+    bottom: "0",
+    width: " 100%",
   },
 }));
 

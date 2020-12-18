@@ -7,8 +7,18 @@ import TimeComponent from "./TimeComponent";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
 import FormikControl from "../formik/FormikControl";
-import { Grid, Paper, Typography, Button } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  Typography,
+  Avatar,
+  CssBaseline,
+  Button,
+  CardContent,
+  Card,
+} from "@material-ui/core";
 import { Formik, Form } from "formik";
+
 // import MenuItem from "@material-ui/core/MenuItem";
 // import InputLabel from "@material-ui/core/InputLabel";
 // import FormControl from "@material-ui/core/FormControl";
@@ -21,16 +31,72 @@ export const UserContext = React.createContext();
 export const DataContext = React.createContext();
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+  // root: {
+  //   "& > *": {
+  //     margin: theme.spacing(1),
+  //     // width: "25ch",
+  //   },
+  // },
+  // root: {
+  //   flexGrow: 1,
+  //   // display: "flex",
+  //   "& > *": {
+  //     margin: theme.spacing(3),
+  //   },
+  // },
+  title: {
+    fontSize: 14,
+  },
+  padd: {
+    padding: theme.spacing(15),
+    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    color: "inherit",
+    backgroundColor: "#8288fa",
+  },
+  padd2: {
+    padding: theme.spacing(15),
+    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    color: "inherit",
+    backgroundColor: "#fc9f42",
+  },
+  padd3: {
+    padding: theme.spacing(8),
+    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    color: "inherit",
+    backgroundColor: "#8288fa",
+  },
+  padd4: {
+    padding: theme.spacing(8),
+    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    color: "inherit",
+    backgroundColor: "#ffeb7a",
+  },
+  padd5: {
+    padding: theme.spacing(10),
+    maxHeight: "200%",
+    color: "inherit",
+
+    backgroundColor: "#758075",
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(5),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    display: "flex",
+  },
+  large: {
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+  },
+  paddingcard: {
+    margin: theme.spacing(5),
+    width: theme.spacing(20),
+    height: theme.spacing(28),
+  },
+  paddingbuttom: {
+    margin: theme.spacing(1),
   },
 }));
-
 const GetCustomerContainer = (props) => {
   const classes = useStyles();
   // const userData = useSelector((state) => state.user.userName);
@@ -49,7 +115,7 @@ const GetCustomerContainer = (props) => {
     dispatch(fetchToken());
     const interval = setInterval(() => {
       dispatch(fetchToken());
-    }, 100000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [dispatch]);
@@ -58,7 +124,7 @@ const GetCustomerContainer = (props) => {
     dispatch(fetchCtoken());
     const interval = setInterval(() => {
       dispatch(fetchCtoken());
-    }, 100000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [dispatch]);
@@ -153,30 +219,70 @@ const GetCustomerContainer = (props) => {
       };
       return (
         <>
-          <Grid container spacing={3} alignItems="stretch" key={i}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Typography variant="h3" component="h2">
-                  Welcome to the token system
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper className={classes.paper}>
-                <Typography variant="h5" component="h2">
-                  Total Token={val.totalToken}
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper className={classes.paper}>
-                <Typography variant="h5" component="h2">
-                  Current Token={val.currentToken}
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
+          <CssBaseline />
+          <Paper elevation={3} className={classes.padd5}>
+            <Grid
+              container
+              direction="column"
+              justify="space-around"
+              alignItems="center"
+              key={i}
+            >
+              <Typography variant="h3" component="h2">
+                Welcome to Online Token System
+              </Typography>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid
+                  direction="column"
+                  justify="space-around"
+                  alignItems="center"
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    style={{ textIndent: "-0.5em" }}
+                  >
+                    Total Token
+                  </Typography>
+                  <Avatar
+                    style={{ backgroundColor: "#d4d4ff", color: "#2a2a33" }}
+                    className={classes.large}
+                  >
+                    {val.totalToken}
+                  </Avatar>
+                </Grid>
+
+                <Grid
+                  direction="column"
+                  justify="space-around"
+                  alignItems="center"
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    style={{ textIndent: "-1.5em" }}
+                  >
+                    Current Token
+                  </Typography>
+                  <Avatar
+                    style={{
+                      backgroundColor: "#d4d4ff",
+                      color: "inherit",
+                    }}
+                    className={classes.large}
+                  >
+                    {val.currentToken}
+                  </Avatar>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12}>
+                {/* <Paper className={classes.paper}> */}
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
@@ -186,85 +292,106 @@ const GetCustomerContainer = (props) => {
                     return (
                       <Form>
                         <Row>
-                          <Col></Col>
-                          <FormikControl
-                            control="select"
-                            label="Select a topic"
-                            name="selectOption"
-                            options={dropdownOptions}
-                          />
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            disabled={!formik.isValid}
-                          >
-                            Submit
-                          </Button>
+                          <Col>
+                            <FormikControl
+                              control="select"
+                              label="Select a branch"
+                              name="selectOption"
+                              options={dropdownOptions}
+                            />
+                          </Col>
+                          <Col>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              type="submit"
+                              disabled={!formik.isValid}
+                            >
+                              Click to book
+                            </Button>
+                          </Col>
                         </Row>
                       </Form>
                     );
                   }}
                 </Formik>
-              </Paper>
+                {/* </Paper> */}
+              </Grid>
             </Grid>
-          </Grid>
+          </Paper>
         </>
       );
     });
   } else {
     toDo = allToken.map((val, i) => (
       <>
-        <Grid container spacing={3} alignItems="stretch" key={i}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper} align>
-              <Typography variant="h5" component="h2" align="right">
-                Logged in as:{userData}
-              </Typography>
-            </Paper>
+        <CssBaseline />
+        <Paper className={classes.padd5}>
+          <Typography variant="h3" component="h2">
+            Online Token System
+          </Typography>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="flex-start"
+          >
+            <Typography variant="h5" component="h2" wrap="nowrap">
+              {" "}
+              <span> Branch :{bN} </span>
+            </Typography>
+            <Typography variant="h5" component="h2" align="right">
+              Logged in as:{userData}
+            </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
+
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid direction="column" justify="center" alignItems="flex-start">
               <Typography variant="h5" component="h2">
-                Total Token={val.totalToken}
+                Total Token {val.totalToken}
               </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
+
               <Typography variant="h5" component="h2">
-                Current Token={val.currentToken}
+                Current Token {val.currentToken}
               </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Typography variant="h5" component="h2">
-                Your Token={yToken}
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>
               <Typography variant="h5" component="h2">
                 <UserContext.Provider value={yToken - val.currentToken}>
                   <TimeComponent />
                 </UserContext.Provider>
               </Typography>
-            </Paper>
+            </Grid>
+
+            <Card
+              style={{ backgroundColor: "#696764" }}
+              className={classes.paddingcard}
+            >
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+              >
+                <CardContent>
+                  <Typography variant="h6" component="h6">
+                    Your Token no is
+                  </Typography>
+                </CardContent>
+                <Avatar
+                  // align="center"
+                  style={{ backgroundColor: "#d4d4ff", color: "#2a2a33" }}
+                  className={classes.large}
+                >
+                  {yToken}
+                </Avatar>
+              </Grid>
+            </Card>
           </Grid>
-          <Grid item xs wrap="wrap">
-            <Paper className={classes.paper}>
-              {/* <Typography variant="h5" component="h2">
-                <span> Branch Name={bN} </span>
-              </Typography> */}
-              <Typography variant="h5" component="h2" wrap="nowrap">
-                {" "}
-                <span> Branch Name={bN} </span>
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
+        </Paper>
       </>
     ));
   }

@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
       // width: 200,
       // padding: "0.5rem",
     },
-    paddingTop: "4rem",
-    paddingBottom: "9.9rem",
+    paddingTop: "2rem",
+    paddingBottom: "2rem",
     flexGrow: 1,
   },
   paper: {
@@ -96,7 +96,12 @@ function LoginContainer(props) {
                         />
                       </Col>
                       <Typography align="left" variant="h6" noWrap>
-                        <Link to="/signup">Create new account</Link>
+                        <h6>
+                          Don't have an account?
+                          <Link to="/signup">
+                            <p>Sign Up</p>
+                          </Link>
+                        </h6>
                       </Typography>
                       {/* <Route path="/" component={SignupContainer} /> */}
 

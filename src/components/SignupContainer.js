@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
       // padding: "0.5rem",
     },
     // padding: "4rem",
-    paddingTop: "4rem",
-    paddingBottom: "2rem",
+    paddingTop: "1.5rem",
+    paddingBottom: "1.5rem",
 
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2.5),
     textAlign: "center",
     color: theme.palette.text.secondary,
     backgroundColor: " #b0d3d6",
@@ -127,7 +127,12 @@ function SignupContainer(props) {
                           />
                         </Col>
                         <Typography align="left" variant="h6" noWrap>
-                          <Link to="/login">Login</Link>
+                          <h6>
+                            Already have an account?
+                            <Link to="/login">
+                              <p>Log in</p>
+                            </Link>
+                          </h6>
                         </Typography>
                         <Col>
                           <Button

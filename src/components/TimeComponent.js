@@ -21,7 +21,7 @@ const TimeComponent = () => {
       // Render a countdown
       return (
         <span>
-          Estimated time= {hours}hrs{minutes}min
+          Estimated time: {hours}hrs{minutes}min
         </span>
       );
     }

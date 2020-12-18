@@ -12,7 +12,8 @@ import CustomerContainer from "./CustomerContainer";
 // import TestContainer from "./TestContainer";
 import Footer from "./Footer";
 import HomeContainer from "./HomeContainer";
-import { CssBaseline } from "@material-ui/core";
+// import { CssBaseline } from "@material-ui/core";
+import FooterContainer from "./FooterContainer";
 
 const MainContainer = (props) => {
   const isUserLoggedin = useSelector((state) => state.user.isLoggedIn);
@@ -31,7 +32,9 @@ const MainContainer = (props) => {
         <Route path="/login" component={LoginContainer} />
 
         <Route path="/signup" component={SignupContainer} />
-        <CssBaseline />
+        {/* <CssBaseline /> */}
+        <FooterContainer />
+
         <Footer />
       </>
     );
@@ -43,16 +46,22 @@ const MainContainer = (props) => {
           {/* <TimeComponent /> */}
           <Route exact path="/" component={GetTokenContainer} />
           <Route path="/login" component={GetTokenContainer} />
+          <FooterContainer />
+
           <Footer />
         </>
       );
     } else {
       callContainer = (
         <>
+          {/* <CssBaseline/> */}
           <Header />
           {/* <TimeComponent /> */}
           <Route exact path="/" component={CustomerContainer} />
           <Route path="/login" component={CustomerContainer} />
+          {/* <CssBaseline /> */}
+          <FooterContainer />
+
           <Footer />
         </>
       );

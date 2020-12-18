@@ -147,7 +147,6 @@ const HomeContainer = () => {
           </Row>
         </Paper>
       </Grid>
-      {/* <Carousel /> */}
       <Paper elevation={3} className={classes.padd2}>
         <Grid
           container
@@ -196,6 +195,7 @@ const HomeContainer = () => {
               </CardActions>
             </Grid>
           </Card>
+
           <Card
             style={{ backgroundColor: "#d1abc8" }}
             className={classes.paddingcard}

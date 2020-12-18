@@ -193,7 +193,7 @@ const Navbar = (props) => {
         <AppBar position="relative" className={classes.code}>
           <Toolbar>
             <IconButton edge="start" color="inherit">
-              <Avatar alt="TS" src="./avatar.png" />
+              <Avatar alt="TS" src="./tslogo.png" />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               Token system
