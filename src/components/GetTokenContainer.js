@@ -85,16 +85,20 @@ const GetTokenContainer = (props) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // var code = currentToken;
     dispatch(fetchToken());
+    const interval = setInterval(() => {
+      dispatch(fetchToken());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [dispatch]);
   useEffect(() => {
     dispatch(fetchCtoken());
-    // const interval = setInterval(() => {
-    //   dispatch(fetchCtoken());
-    // }, 1000);
+    const interval = setInterval(() => {
+      dispatch(fetchCtoken());
+    }, 1000);
 
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, [dispatch]);
   const allToken = useSelector((state) => state.token.allTokens);
   const allCtoken = useSelector((state) => state.customer.allCtokens);
@@ -106,7 +110,7 @@ const GetTokenContainer = (props) => {
     var toDo = allToken.map((val, i) => {
       var Ctoken = allCtoken.map((value, i) => {
         console.log(
-          `value=${value} val=${val} current token=${val.currentToken}and your token=${value.yourToken}`
+          `value=${value} val=${currentToken} current token=${val.currentToken}and your token=${value.yourToken}`
         );
         console.log(value.yourToken);
         if (Number("69") === Number(value.yourToken))
@@ -142,7 +146,7 @@ const GetTokenContainer = (props) => {
             </Typography>
           </div>
         ) : (
-          <>{currentToken}</>
+          <></>
         );
       });
       return (
