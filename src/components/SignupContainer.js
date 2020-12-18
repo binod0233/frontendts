@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "4rem",
     paddingTop: "1.5rem",
     paddingBottom: "1.5rem",
+    backgroundColor: "#94c3ff",
 
     flexGrow: 1,
   },

@@ -35,33 +35,31 @@ const useStyles = makeStyles((theme) => ({
   },
   padd: {
     padding: theme.spacing(15),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
     backgroundColor: "#8288fa",
   },
   padd2: {
     padding: theme.spacing(15),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#fc9f42",
-  },
-  padd3: {
-    padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
-    color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#507cb5",
   },
   padd4: {
     padding: theme.spacing(8),
     // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#ffeb7a",
+    backgroundColor: "#8288fa",
+  },
+  padd3: {
+    padding: theme.spacing(8),
+    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    color: "inherit",
+    backgroundColor: "#507cb5",
   },
   padd5: {
     padding: theme.spacing(8),
     // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#9effa6",
+    backgroundColor: "#507cb5",
   },
   paper: {
     padding: theme.spacing(5),

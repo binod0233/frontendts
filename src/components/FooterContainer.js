@@ -5,12 +5,6 @@ import MailIcon from "@material-ui/icons/Mail";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   "& > *": {
-  //     margin: theme.spacing(1),
-  //     // width: "25ch",
-  //   },
-  // },
   root: {
     flexGrow: 1,
     // display: "flex",
@@ -23,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#696764",
+    backgroundColor: "#8288fa",
   },
 
   large: {

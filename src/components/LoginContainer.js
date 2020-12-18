@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingTop: "2rem",
     paddingBottom: "2rem",
+    backgroundColor: "#94c3ff",
+
     flexGrow: 1,
   },
   paper: {
