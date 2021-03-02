@@ -160,21 +160,7 @@ const GetTokenContainer = (props) => {
             </Grid>
           </div>
         ) : (
-          <>
-            {" "}
-            <Button
-              onClick={() => {
-                var currentToken = val.currentToken + 1;
-
-                setCurrenttoken(currentToken);
-                props.updateToken(val.totalToken, currentToken);
-                // props.deleteCtoken(value.id);
-              }}
-              hidden={val.currentToken >= 0}
-            >
-              Inc. Current Token next
-            </Button>
-          </>
+          <></>
         );
       });
       return (
@@ -201,18 +187,17 @@ const GetTokenContainer = (props) => {
           <Paper elevation={3} className={classes.padd4}>
             {Ctoken}
 
-            {/* <button
-                onClick={() => {
-                  var currentToken = val.currentToken + 1;
+            <Button
+              onClick={() => {
+                var currentToken = val.currentToken + 1;
 
-                  setCurrenttoken(currentToken);
-                  props.updateToken(val.totalToken, currentToken);
-                  // props.deleteCtoken(value.id);
-                }}
-                hidden={val.currentToken >= val.totalToken}
-              >
-                Inc. Current Token
-              </button> */}
+                setCurrenttoken(currentToken);
+                props.updateToken(val.totalToken, currentToken);
+              }}
+              disabled={val.currentToken >= val.totalToken}
+            >
+              Inc. Current Token without removing users
+            </Button>
           </Paper>
         </>
       );
