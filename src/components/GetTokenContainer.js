@@ -162,7 +162,7 @@ const GetTokenContainer = (props) => {
         ) : (
           <>
             {" "}
-            <Button
+            {/* <Button
               onClick={() => {
                 var currentToken = val.currentToken + 1;
 
@@ -173,7 +173,7 @@ const GetTokenContainer = (props) => {
               hidden={value.yourToken === undefined}
             >
               Inc. Current Token next
-            </Button>
+            </Button> */}
           </>
         );
       });
