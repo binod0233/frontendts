@@ -10,7 +10,7 @@ import Header from "./Header";
 // import TimeComponent from "./TimeComponent";
 import CustomerContainer from "./CustomerContainer";
 // import TestContainer from "./TestContainer";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import HomeContainer from "./HomeContainer";
 // import { CssBaseline } from "@material-ui/core";
 import FooterContainer from "./FooterContainer";
@@ -35,7 +35,7 @@ const MainContainer = (props) => {
         {/* <CssBaseline /> */}
         <FooterContainer />
 
-        <Footer />
+        {/* <Footer /> */}
       </>
     );
   } else {
@@ -48,7 +48,7 @@ const MainContainer = (props) => {
           <Route path="/login" component={GetTokenContainer} />
           <FooterContainer />
 
-          <Footer />
+          {/* <Footer /> */}
         </>
       );
     } else {
@@ -62,7 +62,7 @@ const MainContainer = (props) => {
           {/* <CssBaseline /> */}
           <FooterContainer />
 
-          <Footer />
+          {/* <Footer /> */}
         </>
       );
     }

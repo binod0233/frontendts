@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_CTOKEN, ADD_CTOKEN } from "./customerType";
+import { FETCH_CTOKEN, ADD_CTOKEN, DELETE_CTOKEN } from "./customerType";
 require("dotenv").config();
 const burl = process.env.REACT_APP_BE_URL;
 
@@ -57,35 +57,22 @@ export const addCtoken = (yourToken, userId, bankName, userName) => {
   };
 };
 
-// export const updateToken = (totalToken, currentToken) => {
-//   var OPTIONS = {
-//     url: "`${url}`/tokens/5f6b4b4f511ccb4aee09527a",
-//     method: "PUT",
-//     data: { totalToken: totalToken, currentToken: currentToken },
-//     headers: {
-//       "content-type": "application/json",
-//     },
-//   };
-//   axios(OPTIONS)
-//     .then((res) => console.log(res))
-//     .catch((err) => console.log(err));
+export const deleteCtoken = (id) => {
+  console.log("query datta deeeeeeeeeeeeelett jksd skdf", id);
 
-//   return {
-//     type: UPDATE_TOKEN,
-//     payload: totalToken,
-//   };
-// };
+  var OPTIONS = {
+    url: `${burl}/customers/${id}`,
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  };
+  axios(OPTIONS)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 
-// export const user = () => {
-//   var OPTIONS = {
-//     url: "`${url}`/auth/local",
-//     method: "POST",
-//     data: { identifier: "binod@gmail.com", password: "strapi" },
-//     headers: {
-//       "content-type": "application/json",
-//     },
-//   };
-//   axios(OPTIONS)
-//     .then((res) => console.log(console.log("user", res)))
-//     .catch((err) => console.log(err));
-// };
+  return {
+    type: DELETE_CTOKEN,
+    // payload: totalToken,
+  };
+};

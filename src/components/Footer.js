@@ -32,7 +32,7 @@ export default function Footer(props) {
   const classes = useStyles();
 
   return (
-    <footer className={classes.footer} style={{ backgroundColor: "#439aa1" }}>
+    <footer className={classes.footer} style={{ backgroundColor: "#dee1e6" }}>
       <Copyright />
     </footer>
   );

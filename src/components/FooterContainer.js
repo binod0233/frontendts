@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import MailIcon from "@material-ui/icons/Mail";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
+import Footer from "./Footer";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    // display: "flex",
     "& > *": {
       margin: theme.spacing(3),
     },
@@ -15,9 +15,8 @@ const useStyles = makeStyles((theme) => ({
 
   padd5: {
     padding: theme.spacing(3),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#dee1e6",
   },
 
   large: {
@@ -114,6 +113,7 @@ const FooterContainer = () => {
           </Grid>
         </Grid>
       </Paper>
+      <Footer />
     </div>
   );
 };

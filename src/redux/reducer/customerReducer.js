@@ -1,4 +1,8 @@
-import { FETCH_CTOKEN, ADD_CTOKEN } from "../action/customerType";
+import {
+  FETCH_CTOKEN,
+  ADD_CTOKEN,
+  DELETE_CTOKEN,
+} from "../action/customerType";
 
 const initialState = {
   allCtokens: [],
@@ -18,11 +22,11 @@ const customerReducer = (state = initialState, action) => {
         ...state,
         allCtokens: action.payload,
       };
-    // case UPDATE_TOKEN:
-    //   return {
-    //     ...state,
-    //     totalToken: action.payload,
-    //   };
+    case DELETE_CTOKEN:
+      return {
+        ...state,
+        // totalToken: action.payload,
+      };
 
     default:
       return state;

@@ -50,29 +50,28 @@ const useStyles = makeStyles((theme) => ({
   padd: {
     padding: theme.spacing(15),
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#fafafa",
   },
   padd2: {
     padding: theme.spacing(15),
     color: "inherit",
-    backgroundColor: "#fc9f42",
+    backgroundColor: "#fafafa",
   },
   padd3: {
     padding: theme.spacing(8),
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#fafafa",
   },
   padd4: {
-    padding: theme.spacing(8),
-    color: "inherit",
-    backgroundColor: "#ffeb7a",
+    padding: theme.spacing(2),
   },
   padd5: {
     padding: theme.spacing(10),
     maxHeight: "200%",
     color: "inherit",
+    // paddingBlock: "30",
 
-    backgroundColor: "#507cb5",
+    backgroundColor: "#fafafa",
   },
   paper: {
     padding: theme.spacing(5),
@@ -223,14 +222,67 @@ const GetCustomerContainer = (props) => {
               justify="space-around"
               alignItems="center"
               key={i}
+              className={classes.padd4}
             >
               <Typography variant="h3" component="h2">
                 Welcome to Online Token System
               </Typography>
+
               <Grid
                 container
                 direction="row"
-                justify="space-between"
+                justify="center"
+                alignItems="flex-end"
+                className={classes.padd4}
+              >
+                {/* <Paper className={classes.paper}> */}
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={onSubmit}
+                >
+                  {(formik) => {
+                    return (
+                      <Form>
+                        <Row>
+                          <Col>
+                            <FormikControl
+                              control="select"
+                              label="Select a branch"
+                              name="selectOption"
+                              options={dropdownOptions}
+                            />
+                          </Col>
+                          <Col>
+                            <Button
+                              variant="contained"
+                              color="inherit"
+                              type="submit"
+                              disabled={!formik.isValid}
+                            >
+                              Click to book
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Form>
+                    );
+                  }}
+                </Formik>
+                {/* </Paper> */}
+              </Grid>
+
+              <Typography
+                variant="h5"
+                component="h2"
+                style={{ textIndent: "-0.5em" }}
+                className={classes.padd4}
+              >
+                Baneshwor Branch
+              </Typography>
+              <Grid
+                container
+                direction="row"
+                justify="space-evenly"
                 alignItems="center"
               >
                 <Grid
@@ -276,43 +328,6 @@ const GetCustomerContainer = (props) => {
                   </Avatar>
                 </Grid>
               </Grid>
-
-              <Grid item xs={12}>
-                {/* <Paper className={classes.paper}> */}
-                <Formik
-                  initialValues={initialValues}
-                  validationSchema={validationSchema}
-                  onSubmit={onSubmit}
-                >
-                  {(formik) => {
-                    return (
-                      <Form>
-                        <Row>
-                          <Col>
-                            <FormikControl
-                              control="select"
-                              label="Select a branch"
-                              name="selectOption"
-                              options={dropdownOptions}
-                            />
-                          </Col>
-                          <Col>
-                            <Button
-                              variant="contained"
-                              color="inherit"
-                              type="submit"
-                              disabled={!formik.isValid}
-                            >
-                              Click to book
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Form>
-                    );
-                  }}
-                </Formik>
-                {/* </Paper> */}
-              </Grid>
             </Grid>
           </Paper>
         </>
@@ -334,10 +349,10 @@ const GetCustomerContainer = (props) => {
           >
             <Typography variant="h5" component="h2" wrap="nowrap">
               {" "}
-              <span> Branch :{bN} </span>
+              <span> Branch : {bN} </span>
             </Typography>
             <Typography variant="h5" component="h2" align="right">
-              Logged in as:{userData}
+              Logged in as : {userData}
             </Typography>
           </Grid>
 
@@ -363,7 +378,7 @@ const GetCustomerContainer = (props) => {
             </Grid>
 
             <Card
-              style={{ backgroundColor: "#94c3ff" }}
+              style={{ backgroundColor: "#ededed" }}
               className={classes.paddingcard}
             >
               <Grid
@@ -374,7 +389,7 @@ const GetCustomerContainer = (props) => {
               >
                 <CardContent>
                   <Typography variant="h6" component="h6">
-                    Your Token no is
+                    Your Token no. is
                   </Typography>
                 </CardContent>
                 <Avatar

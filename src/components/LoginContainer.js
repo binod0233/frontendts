@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingTop: "2rem",
     paddingBottom: "2rem",
-    backgroundColor: "#94c3ff",
+    backgroundColor: "#fafafa",
 
     flexGrow: 1,
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: " #b0d3d6",
+    backgroundColor: " #ededed",
     // padding: "5rem",
   },
 }));

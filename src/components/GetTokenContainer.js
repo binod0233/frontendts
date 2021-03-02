@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { Paper, Grid, Typography, Avatar } from "@material-ui/core";
+import { Paper, Grid, Typography, Avatar, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchToken, updateToken } from "../redux/action/tokenAction";
-// import { Form } from "formik";
 import { fetchCtoken } from "../redux/action/customerAction";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { addCtoken } from "../redux/action/customerAction";
-// import { setCurrentUser } from "../redux/action/userAction";
+import { addCtoken, deleteCtoken } from "../redux/action/customerAction";
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   "& > *": {
-  //     margin: theme.spacing(1),
-  //     // width: "25ch",
-  //   },
-  // },
   root: {
     flexGrow: 1,
-    // display: "flex",
     "& > *": {
       margin: theme.spacing(3),
     },
@@ -29,33 +20,26 @@ const useStyles = makeStyles((theme) => ({
   },
   padd: {
     padding: theme.spacing(15),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#fafafa",
   },
   padd2: {
     padding: theme.spacing(15),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#fc9f42",
+    backgroundColor: "#d6d4d4",
   },
   padd3: {
     padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#fafafa",
   },
   padd4: {
-    padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
-    color: "inherit",
-    backgroundColor: "#ffeb7a",
+    padding: theme.spacing(1.5),
   },
   padd5: {
-    padding: theme.spacing(3),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
+    padding: theme.spacing(5),
     color: "inherit",
-    backgroundColor: "#9effa6",
+    backgroundColor: "#fafafa",
   },
   paper: {
     padding: theme.spacing(2),
@@ -112,41 +96,85 @@ const GetTokenContainer = (props) => {
         console.log(
           `value=${value} val=${currentToken} current token=${val.currentToken}and your token=${value.yourToken}`
         );
-        console.log(value.yourToken);
+
+        console.log(`your token =${value.id}`);
         if (Number("69") === Number(value.yourToken))
           console.log(value.username);
         return Number(value.yourToken) === Number(val.currentToken) ? (
           <div key={value._id}>
-            <Typography
-              paragraph
-              align="justify"
-              style={{ textIndent: "0.1em" }}
+            <Grid
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
             >
-              Currently being procedded
-            </Typography>
-            <Avatar
-              style={{ backgroundColor: "#d4d4ff", color: "#2a2a33" }}
-              className={classes.large}
-            >
-              {val.currentToken}
-            </Avatar>
-            <Typography
-              paragraph
-              align="justify"
-              style={{ textIndent: "0.1em" }}
-            >
-              bankname={value.bankName}
-            </Typography>
-            <Typography
-              paragraph
-              align="justify"
-              style={{ textIndent: "0.1em" }}
-            >
-              username={value.username}
-            </Typography>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  var currentToken = val.currentToken + 1;
+
+                  setCurrenttoken(currentToken);
+                  props.updateToken(val.totalToken, currentToken);
+                  props.deleteCtoken(value.id);
+                }}
+                disabled={val.currentToken >= val.totalToken}
+              >
+                Inc. Current Token
+              </Button>
+              <div>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  align="justify"
+                  style={{ textIndent: "-4em" }}
+                  className={classes.padd4}
+                >
+                  Currently being proceded
+                </Typography>
+                <Avatar
+                  style={{ backgroundColor: "#d4d4ff", color: "#2a2a33" }}
+                  className={classes.large}
+                >
+                  {val.currentToken}
+                </Avatar>
+                <div className={classes.padd4}>
+                  <Typography
+                    variant="h6"
+                    component="h2"
+                    align="justify"
+                    style={{ textIndent: "-4em" }}
+                  >
+                    Bank Name = {value.bankName}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="h2"
+                    align="justify"
+                    style={{ textIndent: "-4em" }}
+                  >
+                    Username = {value.username}
+                  </Typography>
+                </div>
+              </div>
+            </Grid>
           </div>
         ) : (
-          <></>
+          <>
+            {" "}
+            <Button
+              onClick={() => {
+                var currentToken = val.currentToken + 1;
+
+                setCurrenttoken(currentToken);
+                props.updateToken(val.totalToken, currentToken);
+                // props.deleteCtoken(value.id);
+              }}
+              hidden={value.yourToken === undefined}
+            >
+              Inc. Current Token next
+            </Button>
+          </>
         );
       });
       return (
@@ -171,25 +199,20 @@ const GetTokenContainer = (props) => {
             </Grid>
           </Paper>
           <Paper elevation={3} className={classes.padd4}>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              {Ctoken}
+            {Ctoken}
 
-              <button
+            {/* <button
                 onClick={() => {
                   var currentToken = val.currentToken + 1;
 
                   setCurrenttoken(currentToken);
                   props.updateToken(val.totalToken, currentToken);
+                  // props.deleteCtoken(value.id);
                 }}
+                hidden={val.currentToken >= val.totalToken}
               >
                 Inc. Current Token
-              </button>
-            </Grid>
+              </button> */}
           </Paper>
         </>
       );
@@ -215,6 +238,9 @@ const mapDispatchtoProps = (dispatch) => {
     },
     addCtoken: function (yourToken) {
       dispatch(addCtoken(yourToken));
+    },
+    deleteCtoken: function (id) {
+      dispatch(deleteCtoken(id));
     },
   };
 };

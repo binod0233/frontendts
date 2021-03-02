@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "4rem",
     paddingTop: "1.5rem",
     paddingBottom: "1.5rem",
-    backgroundColor: "#94c3ff",
+    backgroundColor: "#fafafa",
 
     flexGrow: 1,
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2.5),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: " #b0d3d6",
+    backgroundColor: " #ededed",
   },
 }));
 

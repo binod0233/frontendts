@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Paper,
   Grid,
@@ -10,11 +10,13 @@ import {
   Card,
   CardActions,
 } from "@material-ui/core";
+
 // import { Link, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { fetchToken } from "../redux/action/tokenAction";
 
 const useStyles = makeStyles((theme) => ({
   // root: {
@@ -36,30 +38,27 @@ const useStyles = makeStyles((theme) => ({
   padd: {
     padding: theme.spacing(15),
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#faffff",
   },
   padd2: {
     padding: theme.spacing(15),
     color: "inherit",
-    backgroundColor: "#507cb5",
+    backgroundColor: "#dee1e6",
   },
   padd4: {
     padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#8288fa",
+    backgroundColor: "#faffff",
   },
   padd3: {
     padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#507cb5",
+    backgroundColor: "#dee1e6",
   },
   padd5: {
     padding: theme.spacing(8),
-    // backgroundImage: `url(${"https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg"})`,
     color: "inherit",
-    backgroundColor: "#507cb5",
+    backgroundColor: "#dee1e6",
   },
   paper: {
     padding: theme.spacing(5),
@@ -82,6 +81,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 const HomeContainer = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchToken());
+    const interval = setInterval(() => {
+      dispatch(fetchToken());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
+  const allToken = useSelector((state) => state.token.allTokens);
+  console.log(allToken);
 
   return (
     <>
@@ -91,7 +101,7 @@ const HomeContainer = () => {
           <Row>
             <Col>
               <Typography variant="h2" component="h2" nowrap align="left">
-                TMS
+                OTS
               </Typography>{" "}
             </Col>
             <Col>
@@ -158,7 +168,7 @@ const HomeContainer = () => {
             color="textSecondary"
             gutterBottom
           >
-            Get, yourself a tokens <br />
+            Get yourself a token <br />
             in a few clicks
           </Typography>
 
@@ -182,7 +192,6 @@ const HomeContainer = () => {
               </CardContent>
               <CardActions>
                 <p>
-                  First{" "}
                   <Button size="small">
                     {" "}
                     <Link to="/signup" style={{ color: "inherit" }}>
@@ -262,8 +271,71 @@ const HomeContainer = () => {
             {"->"} Monitor tokens in banks without registering.
           </Typography>
         </Grid>
-      </Paper>
-      <Paper elevation={3} className={classes.padd5}>
+        <Typography variant="h5" component="h4">
+          Branch Name : Baneshwor
+        </Typography>
+
+        {allToken.map((val, i) => (
+          <>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="flex-end"
+            >
+              <Card
+                style={{ backgroundColor: "#efffd6" }}
+                className={classes.paddingcard}
+              >
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                >
+                  {" "}
+                  <CardContent>
+                    <Avatar
+                      style={{ backgroundColor: "#fff2fe", color: "#2a2a33" }}
+                      className={classes.large}
+                    >
+                      {val.totalToken}
+                    </Avatar>
+                  </CardContent>
+                  <CardActions>
+                    <h3>Total token</h3>
+                  </CardActions>{" "}
+                </Grid>
+              </Card>
+
+              <Card
+                style={{ backgroundColor: "#ffe8fc" }}
+                className={classes.paddingcard}
+              >
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                >
+                  {" "}
+                  <CardContent>
+                    <Avatar
+                      style={{ backgroundColor: "#d4d4ff", color: "#2a2a33" }}
+                      className={classes.large}
+                    >
+                      {val.currentToken}
+                    </Avatar>
+                  </CardContent>
+                  <CardActions>
+                    <h3>Current token</h3>
+                  </CardActions>{" "}
+                </Grid>
+              </Card>
+            </Grid>
+          </>
+        ))}
+
         <Grid
           container
           direction="column"
@@ -283,6 +355,26 @@ const HomeContainer = () => {
           </Typography>
         </Grid>
       </Paper>
+      {/* <Paper elevation={3} className={classes.padd5}>
+        <Grid
+          container
+          direction="column"
+          justify="flex-end"
+          alignItems="flex-end"
+        >
+          <Typography
+            align="left"
+            variant="h5"
+            component="h4"
+            // style={{ textIndent: "-8em" }}
+          >
+            Advice{" "}
+          </Typography>
+          <Typography paragraph align="justify" style={{ textIndent: "0.1em" }}>
+            {"->"}Be 5-10 min early.
+          </Typography>
+        </Grid>
+      </Paper> */}
     </>
   );
 };
